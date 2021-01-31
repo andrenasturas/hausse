@@ -1,0 +1,2 @@
+markdown2>=2.3.9
+pybars3>=0.9.7
