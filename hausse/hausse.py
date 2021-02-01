@@ -39,7 +39,7 @@ class Hausse(object):
     def source(self, src: str = Defaults.SRC):
         """Sets the source files directory path. `src` by default."""
         
-        self.settings[Keys.SRC] = Path(src)
+        self.settings[Keys.SRC] = Path(src) if src else None
 
         return self
 
@@ -47,7 +47,7 @@ class Hausse(object):
     def dist(self, dist: str = Defaults.DIST):
         """Sets the output directory path. `dist` by default."""
 
-        self.settings[Keys.DIST] = Path(dist)
+        self.settings[Keys.DIST] = Path(dist) if dist else None
 
         return self
 
@@ -83,24 +83,27 @@ class Hausse(object):
         if self.settings.get(Keys.CLEAN, Defaults.CLEAN):
             clean_dir(self.settings.get(Keys.DIST, Defaults.DIST))
        
-        # Load all source files
-        src = self.settings.get(Keys.SRC, Defaults.SRC)
-        self.elements += [Element(p.relative_to(src), src, self.metadata) for p in src.rglob("*") if p.is_file()]
+        # Load all source files if source folder is defined
+        src = self.settings.get(Keys.SRC)
+        if src:
+            self.elements += [Element(p.relative_to(src), src, self.metadata) for p in src.rglob("*") if p.is_file()]
                     
         # Apply all plugins work
         for plugin in self._plugins:
             plugin(self.elements, self.metadata, self.settings)
         
         # Saving built files
-        for document in self.elements:
+        dist = self.settings.get(Keys.DIST)
+        if dist:
+            for document in self.elements:
 
-            # Arborescence creation
-            document_path = Path(os.path.join(self.settings[Keys.DIST], document._path))
-            document_path.parent.mkdir(parents=True, exist_ok=True)
+                # Arborescence creation
+                document_path = Path(os.path.join(dist, document._path))
+                document_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # Saving built file
-            with open(os.path.join(self.settings[Keys.DIST], document._path), "w") as file:
-                file.write(str(document))
+                # Saving built file
+                with open(os.path.join(dist, document._path), "w") as file:
+                    file.write(str(document))
 
         # Restoring original working directory
         os.chdir(owd)
