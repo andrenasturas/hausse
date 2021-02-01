@@ -36,10 +36,10 @@ class Hausse(object):
         self.settings = Defaults.SETTINGS | kwargs | {Keys.BASE: Path(base_dir)}
 
 
-    def source(self, src_path: str = Defaults.SRC):
+    def source(self, src: str = Defaults.SRC):
         """Sets the source files directory path. `src` by default."""
         
-        self.settings[Keys.SRC] = Path(src_path)
+        self.settings[Keys.SRC] = Path(src)
 
         return self
 
