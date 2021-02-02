@@ -25,4 +25,4 @@ from .layout.discover_partials import DiscoverPartials
 from .data.markdown import Markdown
 
 # Metadata processing plugins
-from .metadata.markdown_metadata import MetadataMarkdown
+from .metadata.metadata_markdown import MetadataMarkdown
