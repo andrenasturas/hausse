@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Notes</title>
+    </head>
+
+    <body>
+        <h1>Notes</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Titre</th>
+                    <th>Dossier</th>
+                    <th>Date de création</th>
+                    <th>Date de dernière modification</th>
+                    <th>Identifiant pièce jointe</th>
+                    <th>Emplacement pièce jointe</th>
+                    <th>Sauvegarde note</th>
+                    <th>Identifiant iCloud</th>
+                    <th>Version de Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each notes}}
+                <tr>
+                    <td>{{ ID }}</td>
+                    <td><a href="notes/{{ ID }}.html"><bold>{{ Title }}</bold></a></td>
+                    <td>{{ Folder }}</td>
+                    <td>{{ Created }}</td>
+                    <td>{{ LastModified }}</td>
+                    <td>{{ AttachmentID }}</td>
+                    <td>{{ AttachmentPath }}</td>
+                    <td>{{ AccountDescription }}</td>
+                    <td>{{ AccountIdentifier }}</td>
+                    <td>{{ Version }}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </body>
+</html>
