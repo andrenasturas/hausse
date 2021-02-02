@@ -58,10 +58,12 @@ def test_clean():
 
     h.clean()
 
+    # If `clean()` is called without argument, then Hausse should clean dist
     assert h.settings.get("clean") is True
 
     h.clean(False)
 
+    # But it is still possible to explicitly disable cleaning
     assert h.settings.get("clean") is False
 
 
@@ -87,15 +89,24 @@ def test_use():
 def test_build():
 
     H = Hausse()
-    H.source("test")
-    H.dist("test")
+
+    # Using None to disable Elements autoload and write
+    H.source(None)
+    H.dist(None)
+
+    # Defining minimalistic dummy plugins
+    p1 = lambda e, m, s: s.update({"test": "good"})
+    p2 = lambda e, m, s: s.update({"test": s["test"]+"!"})
+
+    H.use(p1).use(p2).use(p2)
 
     # Saving original working directory
     owd = os.getcwd()
 
-    #H.build()
-    # TODO: Implement test
+    H.build()
+    
     # Check non modified current directory
     assert os.getcwd() == owd
 
-    assert False
+    # Check if internal variables have been modified accurately
+    assert H.settings["test"] == "good!!"
