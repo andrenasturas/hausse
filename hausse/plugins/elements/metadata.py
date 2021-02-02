@@ -11,6 +11,9 @@ class Metadata(Plugin):
 
     Adds metadata to a selection of elements.
 
+    For each Element in the provided `selection`, each `new_metadata` items
+    will be added as object arguments.
+
     Parameters
     ----------
     - `selection` (Selector) :
