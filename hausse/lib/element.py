@@ -22,7 +22,7 @@ class Element(object):
 
         self._path = Path(path)
         self._filename = self._path.name
-        self._global_metadata = global_metadata or dict()
+        self._global_metadata = global_metadata
         
         # Metadata
         for k, v in kwargs.items():
@@ -38,6 +38,8 @@ class Element(object):
             return self._global_metadata[key]
         except KeyError:
             raise AttributeError(f"'{self._filename}' Element has no attribute '{key}', nor has the global metadata")
+        except TypeError:
+            raise AttributeError(f"'{self._filename}' Element has no attribute '{key}', and global metadata is not accessible")
         
 
     def __str__(self):
