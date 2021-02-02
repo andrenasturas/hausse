@@ -45,10 +45,10 @@ def test_collections_call():
     settings = dict()
     metadata = dict()
 
-    d1 = Element(PurePath("a/b/c"), metadata=metadata)
-    d2 = Element(PurePath("a/b/f"), metadata=metadata)
-    d3 = Element(PurePath("a/k/c"), metadata=metadata)
-    d4 = Element(PurePath("a/b/d/c"), metadata=metadata)
+    d1 = Element(PurePath("a/b/c"), global_metadata=metadata)
+    d2 = Element(PurePath("a/b/f"), global_metadata=metadata)
+    d3 = Element(PurePath("a/k/c"), global_metadata=metadata)
+    d4 = Element(PurePath("a/b/d/c"), global_metadata=metadata)
 
     elements.append(d1)
     elements.append(d2)
@@ -57,10 +57,10 @@ def test_collections_call():
 
     c = Collections({
         "test_a": {
-            "pattern": "a/**/*"
+            "selection": "**/c"
         },
         "test_b": {
-            "pattern": "a/b/*",
+            "selection": "a/b/*",
             "reverse": True
         }
     })
@@ -82,14 +82,13 @@ def test_collections_call():
     assert getattr(c2, "name") == "test_b"
 
     # Check correct collections assignement
-    assert c1 in getattr(d1, "collections", [])
-    assert c1 in getattr(d2, "collections", [])
-    assert c1 in getattr(d3, "collections", [])
-    assert c1 in getattr(d4, "collections", [])
-    assert c2 in getattr(d1, "collections", [])
-    assert c2 in getattr(d2, "collections", [])
-    assert c2 not in getattr(d3, "collections", [])
-    assert c2 not in getattr(d4, "collections", [])
+    assert str(c1) in getattr(d1, "collections", [])
+    assert str(c1) in getattr(d3, "collections", [])
+    assert str(c1) in getattr(d4, "collections", [])
+    assert str(c2) in getattr(d1, "collections", [])
+    assert str(c2) in getattr(d2, "collections", [])
+    assert str(c2) not in getattr(d3, "collections", [])
+    assert str(c2) not in getattr(d4, "collections", [])
 
     # Check global metadata binding
     assert metadata.get("test_a") == c1
@@ -99,5 +98,5 @@ def test_collections_call():
     assert getattr(d4, "test_b") == c2
 
     # Check collection elements order
-    assert list(c1) == [d1, d2, d3, d4]
+    assert list(c1) == [d1, d3, d4]
     assert list(c2) == [d2, d1]

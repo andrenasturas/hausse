@@ -7,10 +7,21 @@ import logging
 
 
 class BaseCollection(Plugin):
+    """
+    BaseCollection
+    ==============
 
-    def __init__(self, name):
+    The BaseCollection is the minimal implementation of a Collection.
+
+    It features Element manual addition, Selector-compatible members iteration
+    and customizable sorting and ordering.
+    """
+
+    def __init__(self, name, sortBy: Union[str, Callable] = None, reverse: bool = False):
         self.name = name
         self.members = []
+        self.sortBy = sortBy    # TODO: Implement
+        self.reverse = reverse  # TODO: Improve implementation
 
     def __str__(self) -> str:
         return self.name
@@ -19,6 +30,9 @@ class BaseCollection(Plugin):
         return len(self.members)
 
     def __iter__(self):
+        # TODO: Improve this with persistent reversed storage
+        if self.reverse:
+            return iter(reversed(self.members))
         return iter(self.members)
 
     def add(self, element: Element):
@@ -109,7 +123,13 @@ class Collection(IndexableCollection):
     Collections
     ===========
 
-    Used to group Elements.
+    Groups Elements into an iterable collection.
+
+    This plugin gathers Elements, generally according to their path, and then
+    allows to iterate on them.
+
+    The criteria for selecting the Elements is provided by a path pattern
+    string in `selection` argument. It may also be any Selector object.
 
     Example
     -------
@@ -157,9 +177,7 @@ class Collection(IndexableCollection):
         self,
         name: str,
         selection: Union[Selector, str, Iterable[Element]] = None,
-        sortBy: Union[str, Callable] = None,
         indexBy: Optional[str] = None,
-        reverse: bool = False,
         metadata: dict = None,
         **kwargs,
     ):
@@ -168,8 +186,6 @@ class Collection(IndexableCollection):
         self.selection = (
             Selector(selection) if selection else PathPatternSelector(f"{name}/*")
         )
-        self.sortBy = sortBy
-        self.reverse = reverse
 
         for k, v in (metadata or dict() | kwargs).items():
             setattr(self, k, v)
@@ -196,10 +212,10 @@ class Collections(Plugin):
     
     def __init__(self, collections: dict = {}):
 
-        self.collections = {
-            name: Collection(name, **collection)
+        self.collections = [
+            Collection(name, **collection)
             for name, collection in collections.items()
-        }
+        ]
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
 
