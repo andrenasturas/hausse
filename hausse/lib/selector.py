@@ -14,6 +14,10 @@ class BaseSelector(ABC):
         """Plugin work"""
         raise NotImplementedError
 
+    def __str__(self) -> str:
+        """Plugin str serialization"""
+        raise NotImplementedError
+
 
 class PathPatternSelector(BaseSelector):
     def __init__(self, pattern):
@@ -22,10 +26,16 @@ class PathPatternSelector(BaseSelector):
     def __call__(self, elements: list, metadata: dict, settings: dict):
         return (element for element in elements if element._path.match(self.pattern))
 
+    def __str__(self) -> str:
+        """Plugin str serialization"""
+        return f"PATTERN:{self.pattern}"
+
 
 class ExtensionSelector(BaseSelector):
+    
+    TAG = "ext"
+
     def __init__(self, *extensions):
-        # TODO: Reddit Unicode ocmparaisons https://stackoverflow.com/questions/319426/how-do-i-do-a-case-insensitive-string-comparison
         # As we compare filename extensions, we can rely on `.lower()` without considering special unicode combinaisons
         self.extensions = list(map(lambda x: x.lstrip(".").lower(), extensions))
 
@@ -36,6 +46,9 @@ class ExtensionSelector(BaseSelector):
             if element._path.suffix.lstrip(".").lower() in self.extensions
         )
 
+    def __str__(self) -> str:
+        """Plugin str serialization"""
+        return f"EXT:{','.join(self.extensions)}"
 
 class ElementsSelector(BaseSelector):
     def __init__(self, elements):
@@ -51,6 +64,10 @@ class CollectionSelector(BaseSelector):
     
     def __call__(self, elements: list, metadata: dict, settings: dict):
         return iter(settings['collections'][self.collection])
+
+    def __str__(self) -> str:
+        """Plugin str serialization"""
+        return f"COLLECTION:{self.collection}"
 
 
 class AllSelector(BaseSelector):
@@ -68,6 +85,13 @@ def Selector(selection) -> BaseSelector:
         return selection
 
     if isinstance(selection, str):
+
+        if selection.startswith("EXT:"):
+            return ExtensionSelector(selection[4:])
+
+        if selection.startswith("COLLECTION:"):
+            return CollectionSelector(selection[11:])
+        
         # If selection is a string, assuming that it is a filepath pattern
         return PathPatternSelector(selection)
 
