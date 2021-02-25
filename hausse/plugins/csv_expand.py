@@ -42,7 +42,6 @@ class CSVExpand(Plugin):
                 for i, row in enumerate(records):
 
                     # Parsing CSV data into metadata
-                    # TODO: Check Collections compatibility (as elements are not added in collections here)
                     metadata = dict(zip(headers, row))
 
                     # Extracting main column contents
