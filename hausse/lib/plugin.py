@@ -21,6 +21,9 @@ class Plugin(ABC):
         """Plugin work"""
         raise NotImplementedError
 
+    def save(self):
+        """Returns a JSON-like dict representing the plugin instance config. Used by `Hausse.save()`."""
+        return {k: str(v) for k, v in self.__dict__.items()}
 
 class SelectorPlugin(Plugin):
     """
