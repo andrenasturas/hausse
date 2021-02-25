@@ -13,6 +13,7 @@ class Keys:
 # Default values
 
 class Defaults:
+    FILES = ["hausse.json", ".hausse.json"]
     BASE = "."
     CLEAN = False
     DIST = "dist"
