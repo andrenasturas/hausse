@@ -55,9 +55,9 @@ class MetadataMarkdown(Plugin):
 
     """
 
-    def __init__(self, *args, **kwargs):
-        self.extras = ['cuddled-lists', 'fenced-code-blocks', 'footnotes', 'header-ids', 'markdown-in-html', 'noreferrer', 'tag-friendly', 'task_list']
-        
+    extras = ['cuddled-lists', 'fenced-code-blocks', 'footnotes', 'header-ids', 'markdown-in-html', 'noreferrer', 'tag-friendly', 'task_list']
+
+    def __init__(self, *args, **kwargs):      
         self.keys = set(args)
         self.selection = Selector(kwargs.get("selection", AllSelector()))
 
