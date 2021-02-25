@@ -1,4 +1,6 @@
+import json
 import os
+from importlib import import_module
 from typing import Iterable, Union
 
 from .lib import Plugin, Element
@@ -26,8 +28,9 @@ class Hausse(object):
 
     Parameters
     ----------
-    - `base_dir` ( str ) :
-        Base working directory path for the project. Current folder by default.
+    - `base` ( str ) :
+        Working directory or hausse.json file path. Current folder by default.
+        If None and hausse.json available in current folder, it will be used.
     - `elements` ( list[ Element ] ) :
         Additional elements to be add to the project
     - `metadata` ( dict ) :
@@ -68,7 +71,7 @@ class Hausse(object):
 
     def __init__(
         self,
-        base_dir: str = Defaults.BASE,
+        base: str = None,
         elements: list[Element] = None,
         metadata: dict = None,
         settings: dict = None,
@@ -84,7 +87,22 @@ class Hausse(object):
         self.settings = Defaults.SETTINGS | (settings or dict()) | kwargs
 
         # Base directory
-        self.settings[Keys.BASE] = Path(base_dir)
+        base_path = Path(base) if base else Defaults.BASE
+        
+        if base_path.is_dir() and base is None:
+            # No parameters provided, looking for hausse.json file
+            for file in Defaults.FILES:
+                if (base_path / Path(file)).is_file():
+                    base_path = base_path / Path(file)
+                    break
+        
+        if base_path.is_file():
+            self.settings[Keys.BASE] = base_path.parent
+            self.load(base_path)
+        
+        else:
+            self.settings[Keys.BASE] = base_path
+            
 
     def source(self, src: str = Defaults.SRC):
         """Sets the source files directory path. `src` by default."""
@@ -93,15 +111,15 @@ class Hausse(object):
 
         return self
 
-    def dist(self, dist: str = Defaults.DIST):
+    def destination(self, dist: str = Defaults.DIST):
         """Sets the output directory path. `dist` by default."""
 
         self.settings[Keys.DIST] = Path(dist) if dist else None
 
         return self
 
-    def clean(self, clean: bool = True):
-        """Toggle output directory cleaning. True by default."""
+    def clean(self, clean: bool = Defaults.CLEAN):
+        """Toggle output directory cleaning. False by default."""
 
         self.settings[Keys.CLEAN] = clean
 
@@ -160,3 +178,34 @@ class Hausse(object):
         os.chdir(owd)
 
         return self
+
+    def save(self, file = Defaults.FILE[0], mode = None):
+        """Save the current configuration to a json file, which can be used in command line"""
+
+        raise NotImplementedError()
+
+    def load(self, file):
+        """Loads a `hausse.json` settings file"""
+
+        with open(file) as settings:
+            settings = json.load(settings)
+            cwd = os.get_cwd()
+
+            self.source(settings.get(Keys.SRC))
+            self.destination(settings.get(Keys.DIST))
+            self.clean(settings.get(Keys.CLEAN))
+
+            plugins = import_module("hausse.plugins")
+            
+            for name, kwargs in settings.get("plugins", []).items():
+                plugin = getattr(plugins, name)
+                if plugin:
+                    self.use(plugin(**kwargs))
+
+            self.build()
+
+    
+    # Aliases
+    src = source
+    dist = destination
+    dest = destination
