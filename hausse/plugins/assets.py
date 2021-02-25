@@ -23,8 +23,6 @@ class Assets(Plugin):
         self.path = Path(path)
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
-        
-        # TODO: Improve recursive copy on existant files
         for element in os.listdir(self.path):
             s = os.path.join(self.path, element)
             d = os.path.join(settings[Keys.DIST], element)
