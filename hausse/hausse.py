@@ -87,7 +87,7 @@ class Hausse(object):
         self.settings = Defaults.SETTINGS | (settings or dict()) | kwargs
 
         # Base directory
-        base_path = Path(base) if base else Defaults.BASE
+        base_path = Path(base) if base else Path(Defaults.BASE)
         
         if base_path.is_dir() and base is None:
             # No parameters provided, looking for hausse.json file
