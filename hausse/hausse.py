@@ -179,7 +179,7 @@ class Hausse(object):
 
         return self
 
-    def save(self, file = Defaults.FILE[0], mode = None):
+    def save(self, file = Defaults.FILES[0], mode = None):
         """Save the current configuration to a json file, which can be used in command line"""
 
         raise NotImplementedError()
