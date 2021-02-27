@@ -15,6 +15,7 @@ from .elements.drop import Drop
 from .elements.keep import Keep
 from .elements.collection import Collection, Collections
 from .elements.relations import Relations
+from .elements.index import Index
 
 # Layouts-related plugins
 from .layout.handlebars import Handlebars
