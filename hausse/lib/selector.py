@@ -77,6 +77,10 @@ class AllSelector(BaseSelector):
     def __call__(self, elements: list, metadata: dict, settings: dict):
         return iter(elements)
 
+    def __str__(self) -> str:
+        """Plugin str serialization"""
+        return f"ALL:ALL"
+
 
 def Selector(selection) -> BaseSelector:
 
@@ -85,6 +89,9 @@ def Selector(selection) -> BaseSelector:
         return selection
 
     if isinstance(selection, str):
+
+        if selection == "ALL:ALL":
+            return AllSelector()
 
         if selection.startswith("EXT:"):
             return ExtensionSelector(selection[4:])
