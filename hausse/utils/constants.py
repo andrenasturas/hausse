@@ -19,5 +19,5 @@ class Defaults:
     DIST = "dist"
     SRC = "src"
     LAYOUTS = "layouts"
-    SETTINGS = {Keys.BASE: Path(BASE), Keys.SRC: Path(SRC), Keys.DIST: Path(DIST), CLEAN: CLEAN}
+    SETTINGS = {Keys.BASE: Path(BASE), Keys.SRC: Path(SRC), Keys.DIST: Path(DIST), Keys.CLEAN: CLEAN}
 
