@@ -23,7 +23,13 @@ class Plugin(ABC):
 
     def save(self):
         """Returns a JSON-like dict representing the plugin instance config. Used by `Hausse.save()`."""
-        return {k: str(v) for k, v in self.__dict__.items()}
+        defaults = {k: v.default for k, v in signature(self.__init__).parameters.items() if v.default is not Parameter.empty}
+        # Return all key-values from the plugin except
+        # - technic internal keys (identified by leading underscore)
+        # - default values (identified by plugin init signature inspection)
+        # - and empty values corresponding to None defaults (empty lists initialized from None arguments)
+        return {k: v for k, v in self.__dict__.items() if not k.startswith("_") and v != defaults.get(k) and (v or defaults.get(k))}
+
 
 class SelectorPlugin(Plugin):
     """
