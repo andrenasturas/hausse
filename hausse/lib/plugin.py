@@ -34,6 +34,23 @@ class SelectorPlugin(Plugin):
 
     def __init__(self, selector: Union[str, Iterable, Selector]):
         self.selector = Selector(selector)
+        
+class PathPlugin(Plugin):
+    """
+    Plugin template with a Path parameter.
+
+    PathPlugin should be used when manipulating files outside of source folder.
+    """
+
+    def __init__(self, path: Union[str, Path]):
+        self.path = Path(path)
+
+    def save(self) -> dict:
+        d = super().save()
+        d['path'] = str(d['path'])
+        if d['path'] == signature(self.__init__).parameters['path'].default:
+            del d['path']
+        return d
 
 
 class LayoutPlugin(Plugin):
