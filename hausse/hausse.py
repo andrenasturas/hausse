@@ -107,21 +107,21 @@ class Hausse(object):
     def source(self, src: str = Defaults.SRC):
         """Sets the source files directory path. `src` by default."""
 
-        self.settings[Keys.SRC] = Path(src) if src else None
+        self.settings[Keys.SRC] = Path(src or Defaults.SRC)
 
         return self
 
     def destination(self, dist: str = Defaults.DIST):
         """Sets the output directory path. `dist` by default."""
 
-        self.settings[Keys.DIST] = Path(dist) if dist else None
+        self.settings[Keys.DIST] = Path(dist or Defaults.DIST)
 
         return self
 
     def clean(self, clean: bool = Defaults.CLEAN):
         """Toggle output directory cleaning. False by default."""
 
-        self.settings[Keys.CLEAN] = clean
+        self.settings[Keys.CLEAN] = clean or Defaults.CLEAN
 
         return self
 
