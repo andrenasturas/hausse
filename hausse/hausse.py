@@ -189,8 +189,14 @@ class Hausse(object):
                 yaml.dump(settings, f, allow_unicode=True)
 
 
-    def load(self, file, mode = None):
+    def load(self, file = None, mode = None):
         """Loads a `hausse.json` settings file"""
+
+        if file is None:
+            for file in Defaults.FILES:
+                if (self.settings[Keys.BASE] / Path(file)).exists():
+                    file = self.settings[Keys.BASE] / Path(file)
+                    break
 
         file = Path(file)
 
