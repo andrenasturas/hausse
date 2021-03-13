@@ -1,11 +1,11 @@
 from typing import List
 import markdown2
 
-from hausse.lib import Plugin, Element
-from hausse.lib.selector import Selector, AllSelector
+from hausse.lib import SelectorPlugin, Element
+from hausse.lib.selector import All
 
 
-class MetadataMarkdown(Plugin):
+class MetadataMarkdown(SelectorPlugin):
     """
     MetadataMarkdown
     ================
@@ -57,14 +57,14 @@ class MetadataMarkdown(Plugin):
 
     extras = ['cuddled-lists', 'fenced-code-blocks', 'footnotes', 'header-ids', 'markdown-in-html', 'noreferrer', 'tag-friendly', 'task_list']
 
-    def __init__(self, *args, **kwargs):      
+    def __init__(self, selector=None, *args):      
+        super().__init__(selector, All())
         self.keys = set(args)
-        self.selection = Selector(kwargs.get("selection", AllSelector()))
 
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
 
-        for element in self.selection(elements, metadata, settings):
+        for element in self.selector(elements, metadata, settings):
             
             for key in self.keys:
                 
@@ -72,3 +72,10 @@ class MetadataMarkdown(Plugin):
                 
                 if value:
                     setattr(element, key, markdown2.markdown(value, extras=self.extras))
+
+    
+    def save(self) -> dict:
+        d = super().save()
+        if 'keys' in d:
+            d['keys'] = list(d['keys'])
+        return d

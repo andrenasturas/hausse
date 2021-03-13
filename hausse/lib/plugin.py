@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Iterable, Union
+from typing import Iterable, Optional, Union
+from inspect import signature, Parameter
 
 from hausse.utils import Defaults
-from .selector import Selector, AllSelector
+from .selector import Selector, All
 
 
 class Plugin(ABC):
@@ -38,8 +39,17 @@ class SelectorPlugin(Plugin):
     Selector can be a file path pattern, an iterator over an Elements list, or any other Selector object.
     """
 
-    def __init__(self, selector: Union[str, Iterable, Selector]):
-        self.selector = Selector(selector)
+    def __init__(self, selector: Union[str, Iterable, Selector], selector_by_default = None):
+        self.selector = Selector(selector or selector_by_default)
+        self._selector_by_default = selector_by_default
+
+    def save(self):
+        d = super().save()
+        if self.selector == self._selector_by_default:
+            del d['selector']
+        else:
+            d['selector'] = d['selector'].save()
+        return d
         
 class PathPlugin(Plugin):
     """
@@ -59,12 +69,12 @@ class PathPlugin(Plugin):
         return d
 
 
-class LayoutPlugin(Plugin):
+class LayoutPlugin(PathPlugin, SelectorPlugin):
     """
     Hausse layout plugin structure
     """
 
-    def __init__(self, directory: str = Defaults.LAYOUTS, default: str = None, selector: Union[str, Iterable, Selector] = None, options: dict = None, **kwargs):
+    def __init__(self, path: str = Defaults.LAYOUTS, default: str = None, selector: Union[str, Iterable, Selector] = None, options: dict = None, **kwargs):
         """
         # TODO: Update documentation
         Parameters
@@ -80,7 +90,7 @@ class LayoutPlugin(Plugin):
         **kwargs: dict
             Additional options passed to the layout engine
         """
+        SelectorPlugin.__init__(self, selector, All())
+        PathPlugin.__init__(self, path)
         self.default = default
-        self.directory = Path(directory)
-        self.selection = Selector(selector) if selector else AllSelector()
         self.options = options or dict() | kwargs

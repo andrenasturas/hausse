@@ -1,25 +1,25 @@
 import logging
 from typing import List
-from hausse.lib import Plugin, Element
+from hausse.lib import SelectorPlugin, Element
 from hausse.lib.selector import Selector
 
-class Relations(Plugin):
+class Relations(SelectorPlugin):
     """
     Relations
     =========
 
     Create relations between elements based on a foreign key.
 
-    For each Element in `selection`, this plugin will replace its `key` attribute, if present, by references to the corresponding Element in provided `collection`.
+    For each Element in `selector`, this plugin will replace its `key` attribute, if present, by references to the corresponding Element in provided `collection`.
 
     # TODO: Finish documentation
     """
 
-    def __init__(self, selection, collection, key = None):
+    def __init__(self, selector, collection, key = None):
         
-        self.selection = Selector(selection)
+        super().__init__(selector)
         self.collection = collection if isinstance(collection, str) else collection.name
-        self.key = key or self.collection
+        self.key = key
 
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
@@ -28,9 +28,9 @@ class Relations(Plugin):
 
             collection = settings["collections"][self.collection]
             
-            for element in self.selection(elements, metadata, settings):
+            for element in self.selector(elements, metadata, settings):
 
-                key = getattr(element, self.key, None)
+                key = getattr(element, self.key or self.collection, None)
 
                 if key:
 

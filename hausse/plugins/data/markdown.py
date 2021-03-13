@@ -1,11 +1,11 @@
 from typing import List
 from markdown2 import markdown
 
-from hausse.lib import Plugin, Element, Selector
-from hausse.lib.selector import ExtensionSelector
+from hausse.lib import SelectorPlugin, Element
+from hausse.lib.selector import Extensions
 
 
-class Markdown(Plugin):
+class Markdown(SelectorPlugin):
     """
     Markdown
     ========
@@ -24,13 +24,13 @@ class Markdown(Plugin):
 
     def __init__(self, selection = None, extras: List[str] = None):
 
-        self.selection = Selector(selection) if selection is not None else ExtensionSelector("md", "markdown")
+        super().__init__(selection, Extensions("md", "markdown"))
         self.extras = extras
 
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
 
-        for element in self.selection(elements, metadata, settings):
+        for element in self.selector(elements, metadata, settings):
             m = markdown(element._contents, extras=self.extras or self.default_extras)
             element._contents = str(m)
             element._update_metadata(m.metadata)

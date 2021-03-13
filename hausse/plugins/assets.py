@@ -5,11 +5,11 @@ from pathlib import Path
 import shutil
 from typing import List
 
-from hausse.lib import Plugin, Element
+from hausse.lib import PathPlugin, Element
 from hausse.utils import Keys
 
 
-class Assets(Plugin):
+class Assets(PathPlugin):
     """
         Assets
         ======
@@ -19,8 +19,8 @@ class Assets(Plugin):
         This plugin is useful for copying static files like CSS stylesheets.
     """
 
-        self.path = Path(path)
     def __init__(self, path: str = "assets"):
+        super().__init__(path)
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
         for element in os.listdir(self.path):

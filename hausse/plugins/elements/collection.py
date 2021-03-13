@@ -1,8 +1,8 @@
-from hausse.lib.selector import Selector, ElementsSelector, PathPatternSelector
-from pathlib import PurePath
-from typing import Callable, Generator, Iterable, List, Optional, Union
+from hausse.lib.selector import Selector, Pattern
+from hausse.lib import selector
+from typing import Callable, Iterable, List, Optional, Union
 
-from hausse.lib import Plugin, Element
+from hausse.lib import Plugin, SelectorPlugin, Element
 import logging
 
 
@@ -29,11 +29,19 @@ class BaseCollection(Plugin):
     def __len__(self) -> int:
         return len(self.members)
 
+    def __bool__(self) -> bool:
+        # Prevent Collection from being considered False event if empty
+        # This trick is useful for boolean comparaison in Selectors implementation
+        return True
+
     def __iter__(self):
         # TODO: Improve this with persistent reversed storage
         if self.reverse:
             return iter(reversed(self.members))
         return iter(self.members)
+
+    def _get_selector(self) -> selector.Collection:
+        return selector.Collection(self.name)
 
     def add(self, element: Element):
 
@@ -81,13 +89,13 @@ class IndexableCollection(BaseCollection):
         
         super().__init__(name)
         self.indexBy = indexBy
-        self.index = dict()
+        self._index = dict()
 
     def __getitem__(self, key) -> Element:
-        return self.index[key]
+        return self._index[key]
 
     def get(self, *args, **kwargs) -> Element:
-        return self.index.get(*args, **kwargs)
+        return self._index.get(*args, **kwargs)
 
     def add(self, element: Element):
 
@@ -102,7 +110,7 @@ class IndexableCollection(BaseCollection):
 
             index_name = getattr(element, self.indexBy)
 
-            if index_name in self.index:
+            if index_name in self._index:
                 logging.error(
                     f"Element {element._filename} has the same {self.indexBy} attribute as an already registered element, and will not be accessible from the {self.name} collection index."
                 )
@@ -115,10 +123,10 @@ class IndexableCollection(BaseCollection):
                     f"Element {element._filename} has a non-subscritable {self.indexBy} attribute, and will not be accessible from the {self.name} collection index."
                 )
             else:
-                self.index[index_name] = element
+                self._index[index_name] = element
 
 
-class Collection(IndexableCollection):
+class Collection(IndexableCollection, SelectorPlugin):
     """
     Collections
     ===========
@@ -176,16 +184,13 @@ class Collection(IndexableCollection):
     def __init__(
         self,
         name: str,
-        selection: Union[Selector, str, Iterable[Element]] = None,
+        selector: Union[Selector, str, Iterable[Element]] = None,
         indexBy: Optional[str] = None,
         metadata: dict = None,
         **kwargs,
     ):
-        super().__init__(name, indexBy)
-
-        self.selection = (
-            Selector(selection) if selection else PathPatternSelector(f"{name}/*")
-        )
+        IndexableCollection.__init__(self, name, indexBy)
+        SelectorPlugin.__init__(self, selector, Pattern(f"{name}/*"))
 
         for k, v in (metadata or dict() | kwargs).items():
             setattr(self, k, v)
@@ -196,7 +201,7 @@ class Collection(IndexableCollection):
         super().__call__(elements, metadata, settings)
 
         # Collection filling
-        for element in self.selection(elements, metadata, settings):
+        for element in self.selector(elements, metadata, settings):
             self.add(element)
 
 
