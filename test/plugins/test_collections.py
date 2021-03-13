@@ -57,10 +57,10 @@ def test_collections_call():
 
     c = Collections({
         "test_a": {
-            "selection": "**/c"
+            "selector": "**/c"
         },
         "test_b": {
-            "selection": "a/b/*",
+            "selector": "a/b/*",
             "reverse": True
         }
     })
