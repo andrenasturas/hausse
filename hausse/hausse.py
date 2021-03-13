@@ -90,21 +90,8 @@ class Hausse(object):
         self.settings = Defaults.SETTINGS | (settings or dict()) | kwargs
 
         # Base directory
-        base_path = Path(base) if base else Path(Defaults.BASE)
-        
-        if base_path.is_dir() and base is None:
-            # No parameters provided, looking for hausse.json file
-            for file in Defaults.FILES:
-                if (base_path / Path(file)).is_file():
-                    base_path = base_path / Path(file)
-                    break
-        
-        if base_path.is_file():
-            self.settings[Keys.BASE] = base_path.parent
-            self.load(base_path)
-        
-        else:
-            self.settings[Keys.BASE] = base_path
+        base_path = Path(base_dir) if base_dir else Path(Defaults.BASE)
+        self.settings[Keys.BASE] = base_path.parent if base_path.is_file() else base_path
             
 
     def source(self, src: str = Defaults.SRC):
