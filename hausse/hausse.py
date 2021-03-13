@@ -74,7 +74,7 @@ class Hausse(object):
 
     def __init__(
         self,
-        base: str = None,
+        base_dir: str = None,
         elements: list[Element] = None,
         metadata: dict = None,
         settings: dict = None,
@@ -82,7 +82,7 @@ class Hausse(object):
     ):
 
         # Loaded plugins list
-        self._plugins = []
+        self._plugins = list()
 
         # Data
         self.elements = elements or list()
