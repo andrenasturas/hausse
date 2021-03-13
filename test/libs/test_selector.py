@@ -2,7 +2,7 @@ from hausse.plugins.elements.collection import BaseCollection, Collection
 from pathlib import Path
 import pytest
 from hausse.lib.element import Element
-from hausse.lib.selector import AllSelector, CollectionSelector, ElementsSelector, PathPatternSelector, Selector, ExtensionSelector
+from hausse.lib.selector import All, Collection, Elements, Pattern, Selector, Extensions
 
 
 class TestSelector:
@@ -18,18 +18,18 @@ class TestSelector:
         args = (elements, dict(), dict())
 
         pattern = "foo/*"
-        patternSelector = PathPatternSelector(pattern)
+        patternSelector = Pattern(pattern)
         patternGuess = Selector(pattern)
 
         iterable = elements[2:]
-        iterableSelector = ElementsSelector(iterable)
+        iterableSelector = Elements(iterable)
         iterableGuess = Selector(iterable)
 
         # Selector called on a pattern string should return a PathPatternSelector
-        assert isinstance(patternGuess, PathPatternSelector)
+        assert isinstance(patternGuess, Pattern)
 
         # Selector called on an iterable on Elements should return a ElementsSelector 
-        assert isinstance(iterableGuess, ElementsSelector)
+        assert isinstance(iterableGuess, Elements)
 
         # Double-check equivalence
         assert set(patternGuess(*args)) == set(patternSelector(*args))
@@ -46,7 +46,7 @@ class TestSelector:
 
         args = (elements, dict(), dict())
 
-        assert set(AllSelector()(*args)) == set(elements)
+        assert set(All()(*args)) == set(elements)
         
     def test_selector_collection(self):
 
@@ -63,7 +63,7 @@ class TestSelector:
         collection.add(elements[1])
         collection(*args)
 
-        assert set(CollectionSelector("test")(*args)) == set(elements[:2])
+        assert set(Collection("test")(*args)) == set(elements[:2])
 
     def test_selector_elements(self):
 
@@ -76,7 +76,7 @@ class TestSelector:
 
         args = (elements, dict(), dict())
 
-        selector = ElementsSelector(elements[2:])
+        selector = Elements(elements[2:])
 
         assert set(selector(*args)) == set(elements[2:])
 
@@ -91,9 +91,9 @@ class TestSelector:
 
         args = (elements, dict(), dict())
 
-        s1 = ExtensionSelector("ext")
-        s2 = ExtensionSelector("EXT")
-        s3 = ExtensionSelector(".ext")
+        s1 = Extensions("ext")
+        s2 = Extensions("EXT")
+        s3 = Extensions(".ext")
 
         assert set(s1(*args)) == set(s2(*args)) == set(s3(*args)) == {elements[0], elements[2]}
 
@@ -108,8 +108,8 @@ class TestSelector:
 
         args = (elements, dict(), dict())
 
-        s1 = PathPatternSelector("bar/*")
-        s2 = PathPatternSelector("*.tld")
+        s1 = Pattern("bar/*")
+        s2 = Pattern("*.tld")
 
         assert set(s1(*args)) == {elements[2], elements[3]}
         assert set(s2(*args)) == {elements[1], elements[3]}
