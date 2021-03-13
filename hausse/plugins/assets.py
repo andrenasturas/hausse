@@ -19,8 +19,8 @@ class Assets(Plugin):
         This plugin is useful for copying static files like CSS stylesheets.
     """
 
-    def __init__(self, path: str = "public"):
         self.path = Path(path)
+    def __init__(self, path: str = "assets"):
 
     def __call__(self, elements: List[Element], metadata: dict, settings: dict):
         for element in os.listdir(self.path):
