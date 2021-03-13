@@ -14,7 +14,7 @@ class Keys:
 # Default values
 
 class Defaults:
-    FILES = ["hausse.json", ".hausse.json"]
+    FILES = ["hausse.json", "hausse.yaml", "hausse.yml", ".hausse.json", ".hausse.yaml", ".hausse.yml"]
     BASE = "."
     CLEAN = False
     DIST = "dist"

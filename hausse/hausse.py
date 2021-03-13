@@ -1,4 +1,6 @@
+import logging
 import json
+import yaml
 import os
 from importlib import import_module
 from typing import Iterable, Union
@@ -6,6 +8,7 @@ from typing import Iterable, Union
 from .lib import Plugin, Element
 from .utils import clean_dir, Keys, Defaults
 from pathlib import Path
+from copy import deepcopy
 
 
 class Hausse(object):
@@ -179,30 +182,53 @@ class Hausse(object):
 
         return self
 
-    def save(self, file = Defaults.FILES[0], mode = None):
+    def save(self, file = None, mode = None, hidden: bool = False):
         """Save the current configuration to a json file, which can be used in command line"""
 
-        raise NotImplementedError()
+        if file is None:
+            file = Defaults.FILES[0]
 
-    def load(self, file):
+        if hidden and not file.startswith('.'):
+            file = '.' + file
+
+        settings = dict(set(self.settings.items()) - set(Defaults.SETTINGS.items()))
+        settings[Keys.PLUGINS] = {plugin.__class__.__name__: plugin.save() for plugin in self._plugins}
+
+        with open(file, 'w', encoding='utf-8') as f:
+            if mode == 'json' or not mode and file.endswith('.json'):
+                json.dump(settings, f, ensure_ascii=False, indent=4)
+
+            if mode == 'yaml' or mode == 'yml' or not mode and file.endswith('.yml') or not mode and file.endswith('.yaml'):
+                yaml.dump(settings, f, allow_unicode=True)
+
+
+    def load(self, file, mode = None):
         """Loads a `hausse.json` settings file"""
 
-        with open(file) as settings:
-            settings = json.load(settings)
-            cwd = os.get_cwd()
+        file = Path(file)
 
-            self.source(settings.get(Keys.SRC))
-            self.destination(settings.get(Keys.DIST))
-            self.clean(settings.get(Keys.CLEAN))
+        try:
+            with open(file) as settings:
+                
+                if mode == 'json' or not mode and file.suffix == '.json':
+                    settings = json.load(settings)
 
-            plugins = import_module("hausse.plugins")
-            
-            for name, kwargs in settings.get("plugins", []).items():
-                plugin = getattr(plugins, name)
-                if plugin:
-                    self.use(plugin(**kwargs))
+                elif mode == 'yaml' or mode == 'yml' or not mode and file.suffix in ['.yml', '.yaml']:
+                    settings = yaml.load(settings)                
 
-            self.build()
+                self.source(settings.get(Keys.SRC))
+                self.destination(settings.get(Keys.DIST))
+                self.clean(settings.get(Keys.CLEAN))
+
+                plugins = import_module("hausse.plugins")
+                
+                for name, kwargs in settings.get("plugins", []).items():
+                    plugin = getattr(plugins, name)
+                    if plugin:
+                        self.use(plugin(**kwargs))
+        except:
+            logging.warn(f"Failed to load {file} settings file.")
+
 
     
     # Aliases
