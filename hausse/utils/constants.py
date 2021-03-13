@@ -8,6 +8,7 @@ class Keys:
     CLEAN = "clean"
     DIST = "dist_dir"
     SRC = "src_dir"
+    PLUGINS = "plugins"
 
 
 # Default values
