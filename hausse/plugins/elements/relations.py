@@ -35,10 +35,10 @@ class Relations(SelectorPlugin):
                 if key:
 
                     if isinstance(key, list):
-                        setattr(element, self.key, [collection.get(elt, elt) for elt in key])
+                        setattr(element, self.key or self.collection, [collection.get(elt, elt) for elt in key])
                         
                     else:
-                        setattr(element, self.key, collection.get(key, key))
+                        setattr(element, self.key or self.collection, collection.get(key, key))
         
         else:
 
