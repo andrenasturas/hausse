@@ -26,14 +26,14 @@ class Handlebars(LayoutPlugin):
 
         # Templates compilation
         templates = settings.get("templates", dict())
-        for file in self.directory.rglob("*.hbs"):
+        for file in self.path.rglob("*.hbs"):
             with open(file, "r") as layout:
                 if PurePath(file).name in templates:
                     logging.warning(f"A layout file named {PurePath(file).name} has already been registered. The new one is skipped.")
                 else:
                     templates[PurePath(file).name] = compiler.compile(layout.read())
 
-        for element in self.selection(elements, metadata, settings):
+        for element in self.selector(elements, metadata, settings):
 
             # Template selection
             template = templates.get(getattr(element, 'layout', self.default))
