@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+
+    <script src='js/pagination.min.js'></script>
+    
+    <title>{{ title }}</title>
+</head>
+
+<body>
+
+    {{> header}}
+    
+    <main>
+
+        {{> bio}}
+
+        {{> skills}}
+
+        {{> projects}}
+
+        {{> links}}
+    </main>
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h4 class="white-text">Utilisation des données</h4>
+                    <p>Ce site ne recueille aucune donnée personnelle, et ne fait usage d'aucun cookie.</p>
+                </div>
+                <div class="col l6 s12 right-align">
+                    <h4 class="white-text">Mentions légales</h4>
+                    <p>
+                        Ce site est développé et auto-hébergé par <a href="mailto:webmaster@delfosia.net">André Nasturas</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container grey-text text-lighten-4">
+                <div class="col s12">
+                    Site web développé par <a href="https://an.delfosia.net">André Nasturas</a> avec <a
+                        href="https://github.com/andrenasturas/Hausse">Hausse</a>.
+                    
+                    <a class="right" href="https://delfosia.net">delfosia.net</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed-action-btn">
+        <a id="contact-flating-button" href="#contact" class="btn-floating btn-large teal darken-4 tooltipped" data-position="top"
+            data-tooltip="Contact">
+            <i class="large material-icons">email</i>
+        </a>
+        <a href="#top" class="btn-floating btn-large teal darken-3">
+            <i class=" large material-icons">keyboard_arrow_up</i>
+        </a>
+    </div>
+
+    <!-- Flating contact button CTA -->
+    <div id="contact-floating-button-cta" class="tap-target teal lighten-3" data-target="contact-flating-button">
+        <div class="tap-target-content">
+            <h5>Contactez-moi !</h5>
+            <p>Pour obtenir plus d'informations sur les projets auxquels j'ai participé, n'hésitez pas à m'envoyer un message.</p>
+        </div>
+    </div>
+
+    <!-- Language dropdown -->
+    <ul id="dropdown_language" class="dropdown-content">
+        <li><a href="#!">Français</a></li>
+        <li><a href="#!">English</a></li>
+    </ul>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            var options = {onCloseEnd: function() { var event = new Event('onCloseEnd'); console.log(this); this.el.dispatchEvent(event); }}
+            var instances = M.Modal.init(elems, options);
+        });
+
+        M.AutoInit();
+
+        var elts = document.getElementsByClassName('modal')
+        for (var i = 0; i < elts.length; i++) {
+            elts[i].addEventListener('onCloseEnd', function() {
+                M.TapTarget.getInstance(document.querySelector("#contact-floating-button-cta")).open();
+                console.log("FIRE");
+            }, { once: true });
+            console.log("FOR");
+        }
+    </script>
+
+</body>
+
+</html>

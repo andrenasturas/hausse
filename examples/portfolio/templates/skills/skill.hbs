@@ -1,0 +1,4 @@
+<div class="skill chip white-text"{{#if color}} style="background-color: {{ color }};"{{/if}}>
+    {{#if icon}}<img src="{{ icon }}" class="white-svg" alt="{{#if name}}{{ name }}{{else}}{{ this }}{{/if}}">{{/if}}
+    {{#if name}}{{ name }}{{else}}{{ this }}{{/if}}
+</div>

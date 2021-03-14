@@ -1,0 +1,29 @@
+<div class="col xl3 l4 m6 s12">
+    <div class="card teal darken-4 white-text waves-block waves-light">
+        <div class="card-image">
+            <img class="activator" src="{{ image }}">
+            <div class="activator tags card-title">
+                {{#each skills}}
+                    {{> skill this }}
+                {{/each}}
+            </div>
+        </div>
+        <div class="card-content">
+            <span class="card-title activator">{{ title }}<i class="material-icons right">more_vert</i></span>
+            <p>{{#if link}}<a href="{{ link }}">Lien</a>{{/if}}</p>
+        </div>
+        <div class="card-reveal grey-text text-darken-4">
+            <span class="card-title">{{ title }}<i class="material-icons right">close</i></span>
+            {{{ summary }}}
+            <a href="#{{ _filename }}" class="btn btn-block teal white-text waves-effect waves-light modal-trigger">Fiche détaillée</a>
+        </div>
+        <div id="{{ _filename }}" class="modal black-text">
+            <div class="modal-content">
+                {{{ this }}}
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>

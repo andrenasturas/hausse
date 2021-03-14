@@ -1,0 +1,228 @@
+
+/*******/
+/* CSS */
+/*******/
+
+
+/* Helpers */
+/***********/
+
+.white-svg {
+	filter: invert(1);
+}
+
+/* Global styles */
+/*****************/
+
+/* WHole page */
+
+body,
+html {
+	background-color: #ededed !important;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+
+/* Floating buttons */
+
+div.fixed-action-btn a.btn-floating {
+	margin-left: 12px;
+}
+
+
+/* Block buttons */
+
+.btn-block {
+	width: 100%;
+}
+
+
+/* Global sections style */
+
+section {
+	padding: 50px;
+	margin: auto;
+}
+
+section h3 {
+	font-size: 2.5rem;
+	text-align: center;
+	text-decoration: none;
+}
+
+
+
+
+/* Narrow sections */
+
+.narrow-section {
+	margin: 60px -50px;
+	min-height: 100px;
+}
+
+.narrow-section > div {
+	display: flex;
+}
+
+
+/* Sections titles */
+
+section {
+	position: relative;
+}
+
+section h3 {
+	position: absolute;
+	left: calc(15% - 7.5rem);
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+	z-index: 10;
+}
+
+section h3 i.material-icons {
+	font-size: 5rem;
+}
+
+/* Sections styles */
+/*******************/
+
+/* Header */
+
+header.intro {
+	text-align: center;
+	margin-bottom: 0;
+	padding: 30px;
+	display: flex;
+}
+
+header.intro div {
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+header.intro h1 {
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 3rem;
+}
+
+header.intro h1 small {
+	font-size: 1.4rem;
+	font-weight: 400;
+	display: block;
+	line-height: 1.2;
+	margin-top: 1rem;
+}
+
+header.intro h3 {
+	text-transform: uppercase;
+	background-color: #f5f5f5;
+	padding: 10px;
+	color: #333333;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+
+header.intro p {
+	margin: 2.1rem auto;
+	font-size: 1.1rem;
+}
+
+header.intro img {
+	max-height: 176px;
+}
+
+
+/* Bio section */
+
+section#bio p {
+	font-size: 1.2rem;
+	font-size: oblique;
+}
+
+
+/* Skills section */
+
+div.skill.chip {
+	background-color: rgba(0, 0, 0, 0.65);
+}
+
+div.skill.chip img {
+	padding: 5px;
+	width: 32px;
+}
+
+
+
+/* Projects section */
+
+section#projects ul.pagination {
+	text-align: center;
+	margin: 0;
+}
+
+section#projects ul.pagination li a {
+	color: #DDD;
+}
+
+section#projects ul.pagination li.active {
+	background-color: #004d40;
+}
+
+section#projects ul.pagination li.disabled a {
+	color: #888;
+}
+
+section#projects > div > p {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+section#projects > div > p > label {
+	color: #DDD;
+	margin-left: 40px;
+}
+
+
+/* Network section */
+
+section#network div.narrow-section > div > div {
+	margin-top: -4rem;
+	margin-bottom: -4rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+section#network div.narrow-section a {
+	height: calc(50px + 8rem);
+	width: calc(50px + 8rem);
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 2rem;
+	margin: 1rem;
+}
+
+section#network div.narrow-section a img {
+	height: calc(50px + 4rem);
+	width: calc(50px + 4rem);
+}
+
+
+/* Footer links */
+
+footer a {
+	color: #eee;
+	text-decoration: none;
+}
