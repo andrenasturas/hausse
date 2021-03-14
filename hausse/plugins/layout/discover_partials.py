@@ -18,7 +18,7 @@ class DiscoverPartials(PathPlugin):
         
         settings['partials'] = dict()
 
-        for f in self.directory.rglob(self.pattern):
+        for f in self.path.rglob(self.pattern):
 
             with open(f, "r") as p:
 
