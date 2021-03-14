@@ -79,7 +79,7 @@ Here are a few examples to illustrate the possibilities offered by Hausse and to
 
 - **[Blog](examples/blog)**. Just a simple blog.
 - **[Portfolio](examples/portfolio)**, a single-page website featuring a résumé, skills overviews and projects showcases.
-- **[Notes extraction](examples/notes)**, a presentation of a CSV file of a Notes app data extraction.
+- **[Notes extraction](examples/notes-extraction)**, a presentation of a CSV file of a Notes app data extraction.
 
 ## what if I need a new plugin ?
 
