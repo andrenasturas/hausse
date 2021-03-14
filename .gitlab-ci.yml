@@ -15,7 +15,7 @@ test:
     - python -m pytest
 build:
   script:
-    - pip install pytest pybars3 markdown2 pyyaml
+    - pip install build pybars3 markdown2 pyyaml
     - python -m build
   artifacts:
     paths:
