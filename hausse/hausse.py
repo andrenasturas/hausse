@@ -108,10 +108,10 @@ class Hausse(object):
 
         return self
 
-    def clean(self, clean: bool = True):
+    def clean(self, clean: bool = Defaults.CLEAN):
         """Toggle output directory cleaning. False by default."""
 
-        self.settings[Keys.CLEAN] = clean or Defaults.CLEAN
+        self.settings[Keys.CLEAN] = clean if clean is not None else Defaults.CLEAN
 
         return self
 
