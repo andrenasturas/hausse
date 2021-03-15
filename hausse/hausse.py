@@ -178,7 +178,13 @@ class Hausse(object):
         if hidden and not file.startswith('.'):
             file = '.' + file
 
-        settings = dict(set(self.settings.items()) - set(Defaults.SETTINGS.items()))
+        settings = dict()
+        if str(self.settings[Keys.SRC]) != Defaults.SRC:
+            settings[Keys.SRC] = str(self.settings[Keys.SRC])
+        if str(self.settings[Keys.DIST]) != Defaults.DIST:
+            settings[Keys.DIST] = str(self.settings[Keys.DIST])
+        if self.settings[Keys.CLEAN] != Defaults.CLEAN:
+            settings[Keys.CLEAN] = str(self.settings[Keys.CLEAN])
         settings[Keys.PLUGINS] = {plugin.__class__.__name__: plugin.save() for plugin in self._plugins}
 
         with open(file, 'w', encoding='utf-8') as f:
@@ -193,9 +199,9 @@ class Hausse(object):
         """Loads a `hausse.json` settings file"""
 
         if file is None:
-            for file in Defaults.FILES:
-                if (self.settings[Keys.BASE] / Path(file)).exists():
-                    file = self.settings[Keys.BASE] / Path(file)
+            for default in Defaults.FILES:
+                if (self.settings[Keys.BASE] / Path(default)).exists():
+                    file = self.settings[Keys.BASE] / Path(default)
                     break
 
         file = Path(file)
