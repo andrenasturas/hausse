@@ -63,9 +63,14 @@ h.use(
         # Once the layout plugin processed them, used markdown files are no longer wanted
         Drop("*.md"),
     ]
+)
 # And here the magic happens. When `build()` is called, Hausse project generation begins
 # Files from "src" directory are loaded and stored in a elements structure
 # Every registered Plugin is called in order on the same set of elements, metadata and settings
 # When all Plugins have been called, all files from elements are written in "dist" directory
-)
 h.build()
+# Save will store the Hausse project configuration into a `hausse.json` file,
+# which can be used later by Hausse in CLI mode operation : `python -m hausse
+# hausse.json`. It is useful to simplify the project setup when development is
+# done and it goes to production.
+h.save()
