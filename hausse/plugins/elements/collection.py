@@ -19,15 +19,16 @@ class BaseCollection(Plugin):
 
     def __init__(self, name, sortBy: Union[str, Callable] = None, reverse: bool = False):
         self.name = name
-        self.members = []
         self.sortBy = sortBy    # TODO: Implement
         self.reverse = reverse  # TODO: Improve implementation
+
+        self._members = []
 
     def __str__(self) -> str:
         return self.name
 
     def __len__(self) -> int:
-        return len(self.members)
+        return len(self._members)
 
     def __bool__(self) -> bool:
         # Prevent Collection from being considered False event if empty
@@ -37,20 +38,20 @@ class BaseCollection(Plugin):
     def __iter__(self):
         # TODO: Improve this with persistent reversed storage
         if self.reverse:
-            return iter(reversed(self.members))
-        return iter(self.members)
+            return iter(reversed(self._members))
+        return iter(self._members)
 
     def _get_selector(self) -> selector.Collection:
         return selector.Collection(self.name)
 
     def add(self, element: Element):
 
-        if element in self.members:
+        if element in self._members:
             logging.debug(f"Element {element._filename} is already in {self.name} Collection.")
             return
 
         # Adding to internal element list
-        self.members.append(element)
+        self._members.append(element)
 
         # Create element collections attribute if it does not exists already
         if hasattr(element, "collections"):
