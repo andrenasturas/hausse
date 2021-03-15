@@ -16,9 +16,9 @@ class Keys:
 class Defaults:
     FILES = ["hausse.json", "hausse.yaml", "hausse.yml", ".hausse.json", ".hausse.yaml", ".hausse.yml"]
     BASE = "."
-    CLEAN = False
+    CLEAN = True
     DIST = "dist"
     SRC = "src"
     LAYOUTS = "layouts"
-    SETTINGS = {Keys.BASE: Path(BASE), Keys.SRC: Path(SRC), Keys.DIST: Path(DIST), Keys.CLEAN: CLEAN}
+    SETTINGS = {Keys.BASE: Path(BASE), Keys.SRC: Path(SRC), Keys.DIST: Path(DIST), Keys.CLEAN: False}
 
