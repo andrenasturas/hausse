@@ -69,7 +69,7 @@ class All(BaseSelector):
         return iter(elements)
 
 
-selectors = {k: v for k, v in globals().items() if isclass(v) and v.__module__ == "hausse.lib.selector" and k != "BaseSelector"}
+selectors = {k.lower(): v for k, v in globals().items() if isclass(v) and v.__module__ == "hausse.lib.selector" and k != "BaseSelector"}
 
 def Selector(selection) -> BaseSelector:
 
@@ -80,7 +80,7 @@ def Selector(selection) -> BaseSelector:
     if isinstance(selection, dict):
         # TODO: Support selectors unions
         selector = list(selection.keys())[0]
-        if selector in selectors:
+        if selector.lower() in selectors:
             return selectors[selector](selection[selector])
 
     if hasattr(selection, "_get_selector"):
