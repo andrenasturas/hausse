@@ -12,7 +12,11 @@ before_script:
 test:
   script:
     - pip install -U pytest pybars3 markdown2 pyyaml
-    - python -m pytest
+    - pytest --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
 build:
   script:
     - pip install -U build pybars3 markdown2 pyyaml
