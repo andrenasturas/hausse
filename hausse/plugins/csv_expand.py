@@ -51,7 +51,10 @@ class CSVExpand(Plugin):
                     filename = metadata.get(self.filename_column) if self.filename_column else str(i)
                     filepath = element._path.with_name(filename)
                     
-                    elements.append(Element(filepath, contents, **metadata))
+                    new_file = Element(filepath, **metadata)
+                    new_file._contents = contents
+
+                    elements.append(new_file)
 
                 # Removing original CSV file
-                del element
+                elements.remove(element)
