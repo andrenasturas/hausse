@@ -1,32 +1,8 @@
-<center>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="236px" height="236">
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#306998" stroke="ffd743" style="transform: scale(2) translateY(25px);"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#ffd43b" stroke="ffd743" style="transform: scale(2) translateX(28px) translateY(25px);"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#ffd43b" stroke="ffd743" style="transform: scale(2) translateX(14px)"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#ffd43b" stroke="ffd743" style="transform: scale(2) translateX(42px)"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#ffd43b" stroke="ffd743" style="transform: scale(2) translateX(14px) translateY(50px);"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#ffd43b" stroke="ffd743" style="transform: scale(2) translateX(42px) translateY(50px);"/>
-    <polygon 
-            points="24.8,22 37.3,29.2 37.3,43.7 24.8,50.9 12.3,43.7 12.3,29.2" 
-            fill="#306998" stroke="ffd743" style="transform: scale(2) translateX(56px) translateY(25px);"/>
-</svg>
-</center>
+<center><img src="doc/hausse.png" alt="Hausse logo"/></center>
 
 # Hausse
 
-Hausse is a python plugin-based static site generator. Designed to behave similarly to [Metalsmith](https://github.com/segmentio/metalsmith), Hausse works with plugins that can be chained to process files and produce the wanted result.
+Hausse is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
 
 ## Installation
 
@@ -36,13 +12,13 @@ pip install hausse
 
 ## How it works
 
-First, you may create a Hausse project.
+First, create a Hausse project.
 
 ```python
 project = Hausse()
 ```
 
-Then, you can use the plugins you want. For example, if you want to parse markdown files, there is the **Markdown** plugin.
+Then, use the **[plugins](/doc/plugins)** you need. For example, if you want to parse markdown files, there is the **Markdown** plugin.
 
 ```python
 project.use(Markdown())
@@ -57,21 +33,25 @@ project.use(MetadataMarkdown("rich_metadata"))
 project.use(Handlebars())
 ```
 
-Finally, you can build your project.
+Finally, build your project.
 
 ```python
 project.build()
 ```
 
-For convenience, Hausse allows all its methods to be called in chain, and even using list of Plugins instead of registering them one by one.
+When your pipeline is done, you can save it to a `hausse.json` file.
 
 ```python
-# Equivalent
-Hausse.use(Markdown()).use(MetadataMarkdown("rich_metadata")).use(Handlebars()).build()
-Hausse.use([Markdown(), MetadataMarkdown("rich_metadata"), Handlebars()]).build()
+project.save()
 ```
 
-That's it ! All you have to do now is to select the right plugins for your project !
+This file allows you to build your project directly from command line.
+
+```bash
+python -m hausse path/of/your/project
+```
+
+That's it !
 
 ## Examples
 
@@ -81,7 +61,7 @@ Here are a few examples to illustrate the possibilities offered by Hausse and to
 - **[Portfolio](examples/portfolio)**, a single-page website featuring a résumé, skills overviews and projects showcases.
 - **[Notes extraction](examples/notes-extraction)**, a presentation of a CSV file of a Notes app data extraction.
 
-## what if I need a new plugin ?
+## What if I need a new plugin ?
 
 Nothing more simple ! Writing a new plugin for Hausse is very easy. A Plugin is nothing more than a python object with a specific `__call__` method.
 
@@ -93,7 +73,7 @@ When `build()` is called on a Hausse project, all Plugins are successively _call
 
 ```python
 for plugin in plugins:
-	plugin(elements, metadata, settings)
+    plugin(elements, metadata, settings)
 ```
 
 You may also implement the `__init__` method as you wish to store Plugin parameters that will be needed during the build.
