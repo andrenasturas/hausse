@@ -1,0 +1,36 @@
+{
+    "plugins": {
+        "Assets": {},
+        "Markdown": {},
+        "MetadataMarkdown": {
+            "selector": {
+                "pattern": "summary"
+            }
+        },
+        "Collections": {},
+        "Collection": {
+            "name": "projects",
+            "indexBy": "title"
+        },
+        "Relations": {
+            "selector": {
+                "collection": "projects"
+            },
+            "collection": "skills"
+        },
+        "DiscoverPartials": {
+            "path": "templates"
+        },
+        "Handlebars": {
+            "selector": {
+                "pattern": "index.md"
+            },
+            "default": "layout.hbs"
+        },
+        "Drop": {
+            "selector": {
+                "pattern": "*.md"
+            }
+        }
+    }
+}
