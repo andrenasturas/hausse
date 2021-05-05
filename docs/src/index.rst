@@ -18,8 +18,9 @@ Getting Started
     introduction
     kickstart
     plugins
-    build
+    production
     examples
+    wip
     reference
 
 

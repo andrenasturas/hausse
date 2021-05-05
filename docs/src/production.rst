@@ -1,4 +1,4 @@
-Oroduction
+Production
 ##########
 
 Once your project is setup, the next step is to prepare the production workflow, i.e. automate the build and publication.

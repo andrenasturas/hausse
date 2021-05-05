@@ -23,8 +23,8 @@ Hausse is available on `PyPI <https://pypi.org/project/hausse/>`_.
 
 In order to generate static websites, you will probably need additional packages:
 
-* **markdown2** (`PyPI <https://pypi.org/project/markdown2>`_) for Markdown language processing
-* **pybars3** (`PyPI <https://pypi.org/project/pybars3>`_) for Handlebars templates
+* `markdown2 <https://pypi.org/project/markdown2>`_ for Markdown language processing
+* `pybars3 <https://pypi.org/project/pybars3>`_ for Handlebars templates
 
 Due to the versatility of Hausse, these dependencies are optional and are not automatically installed with it.
    
