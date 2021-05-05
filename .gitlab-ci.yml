@@ -11,11 +11,11 @@ before_script:
   - source .venv/bin/activate
 test:
   script:
-    - pip install pytest pybars3 markdown2 pyyaml
+    - pip install -U pytest pybars3 markdown2 pyyaml
     - python -m pytest
 build:
   script:
-    - pip install build pybars3 markdown2 pyyaml
+    - pip install -U build pybars3 markdown2 pyyaml
     - python -m build
   artifacts:
     paths:
