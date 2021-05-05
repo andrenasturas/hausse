@@ -1,0 +1,18 @@
+{
+    "src_dir": "data",
+    "plugins": {
+        "Markdown": {},
+        "CSVExpand": {
+            "delimiter": "\t",
+            "contents_column": "Data",
+            "filename_column": "ID"
+        },
+        "Collection": {
+            "name": "notes"
+        },
+        "Handlebars": {
+            "path": "layouts",
+            "default": "note.hbs"
+        }
+    }
+}
