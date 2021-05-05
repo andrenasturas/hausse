@@ -1,5 +1,3 @@
-<center><img src="doc/hausse.png" alt="Hausse logo"/></center>
-
 # Hausse
 
 Hausse is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
