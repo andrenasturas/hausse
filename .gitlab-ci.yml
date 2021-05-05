@@ -20,3 +20,7 @@ build:
   artifacts:
     paths:
       - dist/*.whl
+docs:
+  script:
+    - pip install -U Sphinx sphinx-rtd-theme
+    - sphinx-build -b html . public
