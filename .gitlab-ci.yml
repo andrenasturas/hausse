@@ -27,4 +27,4 @@ build:
 docs:
   script:
     - pip install -U Sphinx sphinx-rtd-theme
-    - sphinx-build -b html docs public
+    - sphinx-build -b html docs/src public
