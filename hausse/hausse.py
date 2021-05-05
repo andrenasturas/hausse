@@ -178,6 +178,8 @@ class Hausse(object):
         if hidden and not file.startswith('.'):
             file = '.' + file
 
+        file = self.settings[Keys.BASE] / Path(file)
+
         settings = dict()
         if str(self.settings[Keys.SRC]) != Defaults.SRC:
             settings[Keys.SRC] = str(self.settings[Keys.SRC])
