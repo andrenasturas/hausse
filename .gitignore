@@ -145,4 +145,4 @@ dmypy.json
 
 # Specific Hausse rules
 
-!examples/*/dist/
+!examples/*/dist/*
