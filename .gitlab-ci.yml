@@ -6,25 +6,54 @@ cache:
     - .cache/pip
     - .venv/
 before_script:
-  - python -V  # Print out python version for debugging
+  - python -V
   - virtualenv .venv
   - source .venv/bin/activate
-test:
+  - pip install -U -r requirements.txt
+stages:
+  - Static Analysis
+  - Test
+  - Build
+  - Deploy
+  - Documentation
+
+flake8:
+  stage: Static Analysis
   script:
-    - pip install -U pytest pybars3 markdown2 pyyaml
+    - flake8 --max-line-length=120 hausse
+pylint:
+  stage: Static Analysis
+  script:
+    - pylint -d C0301 hausse
+
+pytest:
+  stage: Test
+  script:
     - pytest --junitxml=report.xml
   artifacts:
     when: always
     reports:
       junit: report.xml
+
 build:
   script:
-    - pip install -U build pybars3 markdown2 pyyaml
+    - pip install -U build
     - python -m build
   artifacts:
     paths:
       - dist/*.whl
+
+portfolio:
+  stage: Examples
+  script:
+    - python -m hausse examples/portfolio/hausse.json
+notes-extraction:
+  stage: Examples
+  script:
+    - python -m hausse examples/notes-extraction/hausse.json
+
 docs:
+  stage: Documentation
   script:
     - pip install -U Sphinx sphinx-rtd-theme
     - sphinx-build -b html docs/src public
