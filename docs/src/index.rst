@@ -19,13 +19,6 @@ Getting Started
     kickstart
     plugins
     production
-    examples
+    samples
     wip
     reference
-
-
-Indices and tables
-******************
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
