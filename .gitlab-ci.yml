@@ -17,6 +17,7 @@ stages:
   - Deploy
   - Examples
   - Documentation
+  - Pages
 
 pylint:
   stage: Quality
@@ -55,8 +56,13 @@ notes-extraction:
   script:
     - python -m hausse examples/notes-extraction/hausse.json
 
-docs:
+reference:
   stage: Documentation
+  script:
+    - pip install -U Sphinx
+    - sphinx-apidoc -o docs/src/ref hausse
+docs:
+  stage: Pages
   script:
     - pip install -U Sphinx sphinx-rtd-theme
     - sphinx-build -b html docs/src public
