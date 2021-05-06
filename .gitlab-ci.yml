@@ -21,10 +21,12 @@ stages:
 flake8:
   stage: Static Analysis
   script:
+    - pip install -U flake8
     - flake8 --max-line-length=120 hausse
 pylint:
   stage: Static Analysis
   script:
+    - pip install -U pylint
     - pylint -d C0301 hausse
 
 pytest:
