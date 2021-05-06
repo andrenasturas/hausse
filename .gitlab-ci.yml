@@ -11,23 +11,22 @@ before_script:
   - source .venv/bin/activate
   - pip install -U -r requirements.txt
 stages:
-  - Static Analysis
+  - Quality
   - Test
   - Build
   - Deploy
   - Examples
   - Documentation
 
-flake8:
-  stage: Static Analysis
-  script:
-    - pip install -U flake8
-    - flake8 --max-line-length=120 hausse
 pylint:
-  stage: Static Analysis
+  stage: Quality
   script:
-    - pip install -U pylint
-    - pylint -d C0301 hausse
+    - pip install -U pylint-gitlab
+    - pylint hausse --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter . > codeclimate.json
+  artifacts:
+    reports:
+      codequality: codeclimate.json
+    when: always
 
 pytest:
   stage: Test
