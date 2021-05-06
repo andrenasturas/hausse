@@ -37,6 +37,7 @@ pytest:
       junit: report.xml
 
 build:
+  stage: Build
   script:
     - pip install -U build
     - python -m build
