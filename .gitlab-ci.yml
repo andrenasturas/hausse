@@ -51,6 +51,9 @@ portfolio:
   stage: Examples
   script:
     - python -m hausse examples/portfolio/hausse.json
+  artifacts:
+    paths:
+      - examples/portfolio/
 notes-extraction:
   stage: Examples
   script:
@@ -61,6 +64,9 @@ reference:
   script:
     - pip install -U Sphinx
     - sphinx-apidoc -o docs/src/ref hausse
+  artifacts:
+    paths:
+      - docs/src/ref/*
 docs:
   stage: Pages
   script:
