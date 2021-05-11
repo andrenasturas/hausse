@@ -159,24 +159,24 @@ class Collection(IndexableCollection, SelectorPlugin):
 
     Attributes
     ----------
-    - `name` (str) :
+    name : str
         Name of the Collection. This is the only mandatory parameter at initialization.
-    - `selection` (Selector | str | iterable[Element]) :
+    selection : Selector | str | iterable[Element]
         A Selector object to indicate which Elements should be added into the Collection.
         It can also be a filepath pattern string, or an iterable over the wanted Elements.
         If `None`, the pattern `"{name}/*`will be used by default, using the Collection's name.
-    - `sortBy` (str | Callable) :
+    sortBy : str | Callable
         #TODO: Implement sortBy
         Not yet implemented.
-    - `indexBy` (str) :
+    indexBy : str
         #TODO: Implement indexBy
         Not yet implemented.
-    - `reverse` (bool) :
+    reverse : bool
         #TODO: Implement reverse
         Not yet implemented.
-    - `metadata` (dict) :
+    metadata : dict
         Key-values fields to be added to the Collection.
-    - `kwargs` (dict) :
+    **kwargs : dict
         Any additional keyword argument will be added to the metadata of the Collection.
         Keywords arguments are added after `metadata` argument and overwrite its values if keys are present in both.
     """
