@@ -1,4 +1,5 @@
-from hausse import Hausse, Markdown, CSVExpand, Collections, Layouts
+from hausse import Hausse
+from hausse.plugins import Markdown, CSVExpand, Collections, Layouts
 
 # Project initialization
 project = Hausse()
