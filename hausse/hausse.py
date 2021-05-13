@@ -8,7 +8,6 @@ from typing import Iterable, Union
 from .lib import Plugin, Element
 from .utils import clean_dir, Keys, Defaults
 from pathlib import Path
-from copy import deepcopy
 
 
 class Hausse(object):
