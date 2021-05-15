@@ -30,22 +30,21 @@ class Hausse(object):
 
     Parameters
     ----------
-    - `base` ( str ) :
+    base : str
         Working directory or hausse.json file path. Current folder by default.
         If None and hausse.json available in current folder, it will be used.
-    - `elements` ( list[ Element ] ) :
+    elements : List of Element
         Additional elements to be add to the project
-    - `metadata` ( dict ) :
+    metadata : dict
         Additional metadata to be add to the project
-    - `settings` ( dict ) :
+    settings : dict
         Additional settings to be add to the project
-    - `**kwargs` ( dict ) :
+    **kwargs : dict
         Additional settings to be add to the project. Overwrite `settings`.
 
 
     Examples
     --------
-
     >>> Hausse().build()
     # Copy the content of `./src` to `./dist`
 
@@ -61,13 +60,13 @@ class Hausse(object):
 
     Attributes
     ----------
-    - `_plugins` ( list[ Plugin ] ) :
+    _plugins : List of Plugin
         Registered plugins that will be called in `build()` method.
-    - `elements` ( list[ Element ] ) :
+    elements : List of Element
         Elements (files, mainly) loaded from source to be processed.
-    - `metadata` ( dict ) :
+    metadata : dict
         Global metadata accessible from any Element.
-    - `settings` ( dict ) :
+    settings : dict
         Technical storage dictionary for plugins interactions.
     """
 
@@ -81,7 +80,7 @@ class Hausse(object):
     ):
 
         # Loaded plugins list
-        self._plugins = list()
+        self._plugins: list[Element] = list()
 
         # Data
         self.elements = elements or list()
