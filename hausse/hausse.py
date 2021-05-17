@@ -1,11 +1,13 @@
+"""Hausse main module."""
+
 import logging
 import json
 import yaml
 import os
 from importlib import import_module
-from typing import Iterable, Union
+from typing import Callable, Iterable, Union
 
-from .lib import Plugin, Element
+from .lib import Element
 from .utils import clean_dir, Keys, Defaults
 from pathlib import Path
 
@@ -76,11 +78,11 @@ class Hausse(object):
         elements: list[Element] = None,
         metadata: dict = None,
         settings: dict = None,
-        **kwargs
+        **kwargs,
     ):
 
         # Loaded plugins list
-        self._plugins: list[Element] = list()
+        self._plugins: list[Callable] = list()
 
         # Data
         self.elements = elements or list()
@@ -89,43 +91,53 @@ class Hausse(object):
 
         # Base directory
         base_path = Path(base_dir) if base_dir else Path(Defaults.BASE)
-        self.settings[Keys.BASE] = base_path.parent if base_path.is_file() else base_path
-            
+        self.settings[Keys.BASE] = (
+            base_path.parent if base_path.is_file() else base_path
+        )
 
     def source(self, src: str = Defaults.SRC):
-        """Sets the source files directory path. `src` by default."""
-
+        """Set the source files directory path. *Defaults to `src`*."""
         self.settings[Keys.SRC] = Path(src or Defaults.SRC)
 
         return self
 
     def destination(self, dist: str = Defaults.DIST):
-        """Sets the output directory path. `dist` by default."""
-
+        """Set the output directory path. *Defaults to `dist`*."""
         self.settings[Keys.DIST] = Path(dist or Defaults.DIST)
 
         return self
 
     def clean(self, clean: bool = Defaults.CLEAN):
         """Toggle output directory cleaning. False by default."""
-
-        self.settings[Keys.CLEAN] = clean if clean is not None else Defaults.CLEAN
+        self.settings[Keys.CLEAN] = Defaults.CLEAN if clean is None else clean
 
         return self
 
-    def use(self, plugin: Union[Iterable[Plugin], Plugin]):
-        """Register a plugin or a list of plugins in the Hausse project plugins list to be used."""
+    def use(self, plugin: Union[Iterable[Callable], Callable]):
+        """Register a plugin or a list of plugins.
 
+        Each plugin have to be registered into the Hausse project via this
+        method. Plugins are stored and used in order. A plugin can be used
+        multiple time at once if relevent.
+
+        Note
+        ----
+        This method actually accepts any callables, not only Plugin objects, in
+        order to allow usage of simple custom-made methods without full Plugin
+        implementation.
+
+        """
         if isinstance(plugin, list):
             self._plugins += plugin
-        else:
+        elif callable(plugin):
             self._plugins.append(plugin)
+        else:
+            raise ValueError(f"{type(plugin)} is not callable nor an iterable")
 
         return self
 
     def build(self):
-        """Build the project. All the actual processing logic is run in this method scope."""
-
+        """Build the project."""
         # Saving original working directory
         owd = os.getcwd()
 
@@ -167,14 +179,12 @@ class Hausse(object):
 
         return self
 
-    def save(self, file = None, mode = None, hidden: bool = False):
-        """Save the current configuration to a json file, which can be used in command line"""
-
+    def save(self, file=None, mode=None, hidden: bool = False):
+        """Save the current configuration to a file."""
         if file is None:
             file = Defaults.FILES[0]
-
-        if hidden and not file.startswith('.'):
-            file = '.' + file
+        if hidden and not file.startswith("."):
+            file = "." + file
 
         file = self.settings[Keys.BASE] / Path(file)
 
@@ -185,17 +195,25 @@ class Hausse(object):
             settings[Keys.DIST] = str(self.settings[Keys.DIST])
         if self.settings[Keys.CLEAN] != Defaults.CLEAN:
             settings[Keys.CLEAN] = str(self.settings[Keys.CLEAN])
-        settings[Keys.PLUGINS] = {plugin.__class__.__name__: plugin.save() for plugin in self._plugins}
+        settings[Keys.PLUGINS] = {
+            plugin.__class__.__name__: plugin.save() for plugin in self._plugins
+        }
 
-        with open(file, 'w', encoding='utf-8') as f:
-            if mode == 'json' or not mode and file.endswith('.json'):
+        with open(file, "w", encoding="utf-8") as f:
+            if mode == "json" or not mode and file.endswith(".json"):
                 json.dump(settings, f, ensure_ascii=False, indent=4)
 
-            if mode == 'yaml' or mode == 'yml' or not mode and file.endswith('.yml') or not mode and file.endswith('.yaml'):
+            if (
+                mode == "yaml"
+                or mode == "yml"
+                or not mode
+                and file.endswith(".yml")
+                or not mode
+                and file.endswith(".yaml")
+            ):
                 yaml.dump(settings, f, allow_unicode=True)
 
-
-    def load(self, file = None, mode = None):
+    def load(self, file=None, mode=None):
         """Loads a `hausse.json` settings file"""
 
         if file is None:
@@ -208,19 +226,24 @@ class Hausse(object):
 
         try:
             with open(file) as settings:
-                
-                if mode == 'json' or not mode and file.suffix == '.json':
+
+                if mode == "json" or not mode and file.suffix == ".json":
                     settings = json.load(settings)
 
-                elif mode == 'yaml' or mode == 'yml' or not mode and file.suffix in ['.yml', '.yaml']:
-                    settings = yaml.load(settings)                
+                elif (
+                    mode == "yaml"
+                    or mode == "yml"
+                    or not mode
+                    and file.suffix in [".yml", ".yaml"]
+                ):
+                    settings = yaml.load(settings)
 
                 self.source(settings.get(Keys.SRC))
                 self.destination(settings.get(Keys.DIST))
                 self.clean(settings.get(Keys.CLEAN))
 
                 plugins = import_module("hausse.plugins")
-                
+
                 for name, kwargs in settings.get("plugins", []).items():
                     plugin = getattr(plugins, name)
                     if plugin:
@@ -228,8 +251,6 @@ class Hausse(object):
         except:
             logging.warn(f"Failed to load {file} settings file.")
 
-
-    
     # Aliases
     src = source
     dist = destination
