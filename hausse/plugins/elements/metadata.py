@@ -16,11 +16,11 @@ class Metadata(Plugin):
 
     Parameters
     ----------
-    - `selection` (Selector) :
+    selection
         Elements to edit.
-    - `new_metadata` (dict) :
+    new_metadata : dict
         A dictionnary of metadata elements added to the selected collection.
-    - `replace` (bool, `False` by default) :
+    replace : bool
         If True, allows the plugin to overwrite existing metadata in elements.
         
     """

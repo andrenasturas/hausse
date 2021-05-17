@@ -14,9 +14,9 @@ class Markdown(SelectorPlugin):
 
     Parameters
     ----------
-    - `selection` :
+    selection
         Files to parse. By default, all files with `.md` or `.markdown` extensions are selected.
-    - `extras` (List[str]) :
+    extras : List of str
         Extras settings passed to the markdown processor.
     """
 

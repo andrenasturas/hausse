@@ -25,12 +25,12 @@ class MetadataMarkdown(SelectorPlugin):
 
     Parameters
     ----------
-    - `*args` ( str ) :
-        Metadata keys containing the string to be parsed as metadata
-    - `selection` ( Selector | str | Iterable[ Element ] ) :
+    selection
         If provided, indicates which Elements should be processed.
         By default, all Elements are processed.
         Note that this parameter must be passed explicitly.
+    *args : List of str
+        Metadata keys containing the string to be parsed as metadata
 
     Example
     -------
@@ -46,9 +46,9 @@ class MetadataMarkdown(SelectorPlugin):
 
     Attributes
     ----------
-    - `keys` ( List[ str ] ) :
+    keys : List of str
         Metadata keys containing the string to be parsed as metadata
-    - `selection` ( Selector ) :
+    selection : Selector
         If provided, indicates which Elements should be processed.
         By default, all Elements are processed.
         Note that this parameter must be passed explicitly.

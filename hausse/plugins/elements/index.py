@@ -15,13 +15,13 @@ class Index(Plugin):
 
     Parameters
     ----------
-    - `directory` (Path) :
+    directory : Path
         Directory where to create an index file. `.` by default.
-    - `filename` (str) :
+    filename : Path
         Index filename. `index.html` by default.
-    - `metadata` (dict) :
+    metadata : dict
         Metadata passed to the new index Element.
-    - `**kwargs` :
+    **kwargs
         Metadata passed to the new index Element.
     """
 
