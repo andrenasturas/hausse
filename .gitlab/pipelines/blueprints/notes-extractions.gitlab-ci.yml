@@ -1,0 +1,7 @@
+notes-extraction:
+  stage: Blueprints
+  script:
+    - python -m hausse blueprints/notes-extraction/hausse.json
+  artifacts:
+    paths:
+      - blueprints/notes-extraction/

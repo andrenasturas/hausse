@@ -1,0 +1,5 @@
+docs:
+  stage: Pages
+  script:
+    - pip install -U Sphinx sphinx-rtd-theme
+    - sphinx-build -b html docs/src public

@@ -14,61 +14,15 @@ stages:
   - Quality
   - Test
   - Build
+  - Blueprints
   - Deploy
-  - Examples
   - Documentation
   - Pages
 
-pylint:
-  stage: Quality
-  script:
-    - pip install -U pylint-gitlab
-    - pylint hausse --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter . > codeclimate.json
-  artifacts:
-    reports:
-      codequality: codeclimate.json
-    when: always
-
-pytest:
-  stage: Test
-  script:
-    - pytest --junitxml=report.xml
-  artifacts:
-    when: always
-    reports:
-      junit: report.xml
-
-build:
-  stage: Build
-  script:
-    - pip install -U build
-    - python -m build
-  artifacts:
-    paths:
-      - dist/*.whl
-
-portfolio:
-  stage: Examples
-  script:
-    - python -m hausse examples/portfolio/hausse.json
-  artifacts:
-    paths:
-      - examples/portfolio/
-notes-extraction:
-  stage: Examples
-  script:
-    - python -m hausse examples/notes-extraction/hausse.json
-
-reference:
-  stage: Documentation
-  script:
-    - pip install -U Sphinx
-    - sphinx-apidoc -o docs/src/ref hausse
-  artifacts:
-    paths:
-      - docs/src/ref/*
-docs:
-  stage: Pages
-  script:
-    - pip install -U Sphinx sphinx-rtd-theme
-    - sphinx-build -b html docs/src public
+include:
+  - .gitlab/pipelines/pylint.gitlab-ci.yml
+  - .gitlab/pipelines/pytest.gitlab-ci.yml
+  - .gitlab/pipelines/build.gitlab-ci.yml
+  - .gitlab/pipelines/blueprints.gitlab-ci.yml
+  - .gitlab/pipelines/reference.gitlab-ci.yml
+  - .gitlab/pipelines/docs.gitlab-ci.yml

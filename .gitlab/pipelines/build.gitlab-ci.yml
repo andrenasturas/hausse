@@ -1,0 +1,8 @@
+build:
+  stage: Build
+  script:
+    - pip install -U build
+    - python -m build
+  artifacts:
+    paths:
+      - dist/*.whl

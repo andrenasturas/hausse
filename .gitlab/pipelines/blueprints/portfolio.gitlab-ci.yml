@@ -1,0 +1,7 @@
+portfolio:
+  stage: Blueprints
+  script:
+    - python -m hausse blueprints/portfolio/hausse.json
+  artifacts:
+    paths:
+      - blueprints/portfolio/
