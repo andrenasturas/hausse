@@ -2,4 +2,4 @@ docs:
   stage: Pages
   script:
     - pip install -U Sphinx sphinx-rtd-theme
-    - python -m sphinx-build -b html docs/src public
+    - sphinx-build -b html docs/src public
