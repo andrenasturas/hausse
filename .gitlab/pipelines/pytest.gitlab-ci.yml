@@ -1,7 +1,7 @@
 pytest:
   stage: Test
   script:
-    - pytest --junitxml=report.xml
+    - python -m pytest --junitxml=report.xml
   artifacts:
     when: always
     reports:

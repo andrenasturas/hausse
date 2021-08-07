@@ -2,7 +2,7 @@ reference:
   stage: Documentation
   script:
     - pip install -U Sphinx
-    - sphinx-apidoc -o docs/src/ref hausse
+    - python -m sphinx-apidoc -o docs/src/ref hausse
   artifacts:
     paths:
       - docs/src/ref/*

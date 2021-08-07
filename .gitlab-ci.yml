@@ -9,6 +9,7 @@ before_script:
   - python -V
   - virtualenv .venv
   - source .venv/bin/activate
+  - python -m pip install --upgrade
   - pip install -U -r requirements.txt
 stages:
   - Quality

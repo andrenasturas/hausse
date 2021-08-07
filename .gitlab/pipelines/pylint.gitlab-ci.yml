@@ -2,7 +2,7 @@ pylint:
   stage: Quality
   script:
     - pip install -U pylint-gitlab
-    - pylint hausse --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter . > codeclimate.json
+    - python -m pylint hausse --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter . > codeclimate.json
   artifacts:
     reports:
       codequality: codeclimate.json
