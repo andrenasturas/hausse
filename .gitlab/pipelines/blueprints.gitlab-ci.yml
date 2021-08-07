@@ -1,3 +1,3 @@
 include:
-  - .gitlab/pipelines/blueprints/portfolio.gitlab-ci.yml
-  - .gitlab/pipelines/blueprints/notes-extraction.gitlab-ci.yml
+  - blueprints/portfolio.gitlab-ci.yml
+  - blueprints/notes-extraction.gitlab-ci.yml
