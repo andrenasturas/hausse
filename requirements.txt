@@ -1,4 +1,5 @@
 markdown2>=2.3.9
 pybars3>=0.9.7
 PyYAML>=5.4.1
+pytest>=6.1.2
 twine>=3.4.2
