@@ -1,0 +1,4 @@
+pypi:
+  stage: Distribution
+  script:
+    - TWINE_PASSWORD=${PYPI_TOKEN} python -m twine upload --verbose dist/*

@@ -16,9 +16,9 @@ stages:
   - Test
   - Build
   - Blueprints
-  - Deploy
   - Documentation
   - Pages
+  - Distribution
 
 include:
   - .gitlab/pipelines/pylint.gitlab-ci.yml
@@ -27,3 +27,4 @@ include:
   - .gitlab/pipelines/blueprints.gitlab-ci.yml
   - .gitlab/pipelines/reference.gitlab-ci.yml
   - .gitlab/pipelines/docs.gitlab-ci.yml
+  - .gitlab/pipelines/distribution.gitlab-ci.yml

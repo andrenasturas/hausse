@@ -1,0 +1,3 @@
+include:
+  - .gitlab/pipelines/dists/package-registry.gitlab-ci.yml
+  - .gitlab/pipelines/dists/pypi.gitlab-ci.yml
