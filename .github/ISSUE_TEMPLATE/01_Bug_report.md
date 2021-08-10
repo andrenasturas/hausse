@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a found bug
+about: File a report describing a malfunction
 title: "Bug: "
 labels: "bug"
 assignees: ""
