@@ -16,7 +16,7 @@ First, create a Hausse project.
 project = Hausse()
 ```
 
-Then, use the **[plugins](/doc/plugins)** you need. For example, if you want to parse markdown files, there is the **Markdown** plugin.
+Then, use the **[plugins](/hausse/plugins)** you need. For example, if you want to parse markdown files, there is the **Markdown** plugin.
 
 ```python
 project.use(Markdown())
@@ -55,9 +55,8 @@ That's it !
 
 Here are a few examples to illustrate the possibilities offered by Hausse and to inspire your future projects
 
-- **[Blog](examples/blog)**. Just a simple blog.
-- **[Portfolio](examples/portfolio)**, a single-page website featuring a résumé, skills overviews and projects showcases.
-- **[Notes extraction](examples/notes-extraction)**, a presentation of a CSV file of a Notes app data extraction.
+- **[Portfolio](blueprints/portfolio)**, a single-page website featuring a résumé, skills overviews and projects showcases.
+- **[Notes extraction](blueprints/notes-extraction)**, a presentation of a CSV file of a Notes app data extraction.
 
 ## What if I need a new plugin ?
 
@@ -76,8 +75,4 @@ for plugin in plugins:
 
 You may also implement the `__init__` method as you wish to store Plugin parameters that will be needed during the build.
 
-## Why this name ?
-
-The word `hausse` is the french name for a honey super. It thus refers to the grid that you set up for the bees to build a layer of the structure, which you then harvest.
-
-One may also consider it as an acronym for _Highly Adjustable Universal Static Site Generator_.
+Finally, if you feel like it should be added to hausse plugins, you can create a [plugin request](https://github.com/andrenasturas/hausse/issues/new?assignees=&labels=plugin&template=03_Plugin_request.md&title=Plugin%3A+).
