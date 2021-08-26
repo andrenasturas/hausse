@@ -1,9 +1,8 @@
-from hausse.lib.selector import Selector, Pattern
-from hausse.lib import selector
+import logging
 from typing import Callable, Iterable, List, Optional, Union
 
-from hausse.lib import Plugin, SelectorPlugin, Element
-import logging
+from hausse.lib import Element, Plugin, Project, SelectorPlugin, project, selector
+from hausse.lib.selector import Pattern, Selector
 
 
 class BaseCollection(Plugin):
@@ -17,9 +16,11 @@ class BaseCollection(Plugin):
     and customizable sorting and ordering.
     """
 
-    def __init__(self, name, sortBy: Union[str, Callable] = None, reverse: bool = False):
+    def __init__(
+        self, name, sortBy: Union[str, Callable] = None, reverse: bool = False
+    ):
         self.name = name
-        self.sortBy = sortBy    # TODO: Implement
+        self.sortBy = sortBy  # TODO: Implement
         self.reverse = reverse  # TODO: Improve implementation
 
         self._members = []
@@ -47,7 +48,9 @@ class BaseCollection(Plugin):
     def add(self, element: Element):
 
         if element in self._members:
-            logging.debug(f"Element {element._filename} is already in {self.name} Collection.")
+            logging.debug(
+                f"Element {element._filename} is already in {self.name} Collection."
+            )
             return
 
         # Adding to internal element list
@@ -58,36 +61,35 @@ class BaseCollection(Plugin):
             if isinstance(element.collections, list):
                 element.collections = set(element.collections)
             elif not isinstance(element.collections, set):
-                element.collections = {element.collections}            
+                element.collections = {element.collections}
         else:
             setattr(element, "collections", set())
 
         # Reverse-adding collection name and various attributes to element
         element.collections.add(self.name)
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+    def __call__(self, project: Project):
 
         # Collection setup
         # Creating dedicated attribute in the settings
-        if "collections" not in settings:
-            settings["collections"] = dict()
+        if "collections" not in project.settings:
+            project.settings["collections"] = dict()
 
         # Collection registration
-        settings["collections"][self.name] = self
+        project.settings["collections"][self.name] = self
 
         # Metadata shortcut
-        if self.name in metadata:
+        if self.name in project.metadata:
             logging.warning(
                 f"Attribute {self.name} already exists in metadata, collection shortcut creation skipped."
             )
         else:
-            metadata[self.name] = self
+            project.metadata[self.name] = self
 
 
 class IndexableCollection(BaseCollection):
-
     def __init__(self, name, indexBy):
-        
+
         super().__init__(name)
         self.indexBy = indexBy
         self._index = dict()
@@ -196,13 +198,12 @@ class Collection(IndexableCollection, SelectorPlugin):
         for k, v in (metadata or dict() | kwargs).items():
             setattr(self, k, v)
 
-    
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+    def __call__(self, project: project):
 
-        super().__call__(elements, metadata, settings)
+        super().__call__(project)
 
         # Collection filling
-        for element in self.selector(elements, metadata, settings):
+        for element in self.selector(project):
             self.add(element)
 
 
@@ -215,30 +216,29 @@ class Collections(Plugin):
 
     This plugin will create automatically Collections based on the `collections` metadata of Elements if present.
     """
-    
+
     def __init__(self, collections: dict = {}):
 
         self.collections = [
-            Collection(name, **collection)
-            for name, collection in collections.items()
+            Collection(name, **collection) for name, collection in collections.items()
         ]
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+    def __call__(self, project: Project):
 
         # Collections setup
-        if not "collections" in settings:
-            settings["collections"] = dict()
+        if not "collections" in project.settings:
+            project.settings["collections"] = dict()
 
         # Collections registration
         # TODO: Possible optimization by not executing as plugin but filling all by once in elements loop ?
         for collection in self.collections:
-            collection(elements, metadata, settings)
+            collection(project)
 
-        # Parsing elements 
-        for element in elements:
+        # Parsing elements
+        for element in project.elements:
 
             # Check collection attr in element
-            if hasattr(element, "collections"):    
+            if hasattr(element, "collections"):
 
                 # Fix single intially set collection
                 if isinstance(element.collections, list):
@@ -250,7 +250,7 @@ class Collections(Plugin):
                 for name in element.collections:
 
                     # Auto-creation
-                    if name not in settings["collections"]:
-                        BaseCollection(name)(elements, metadata, settings)
+                    if name not in project.settings["collections"]:
+                        BaseCollection(name)(project)
 
-                    settings["collections"][name].add(element)
+                    project.settings["collections"][name].add(element)

@@ -49,5 +49,5 @@ Example of GitLab Pages workflow:
     artifacts:
         paths:
             -public
-        
+
 .. note:: GitLab looking for Pages files in a directory named ``public``, you should use the argument :option:`--dist` to fix the output directory accordingly. This is equivalent to adding ``.destination('public')`` in the design script.

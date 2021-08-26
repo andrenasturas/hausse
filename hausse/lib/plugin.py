@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from inspect import Parameter, signature
 from pathlib import Path
 from typing import Iterable, Optional, Union
-from inspect import signature, Parameter
 
-from hausse.utils import Defaults
-from .selector import Selector, All
+from ..utils import Defaults
+from .project import Project
+from .selector import All, BaseSelector, Selector
 
 
 class Plugin(ABC):
@@ -14,43 +15,58 @@ class Plugin(ABC):
 
     @abstractmethod
     def __init__(self):
-        """Plugin initialisation"""
+        """Initialize plugin."""
         raise NotImplementedError
 
     @abstractmethod
-    def __call__(self, elements: list, metadata: dict, settings: dict):
-        """Plugin work"""
+    def __call__(self, project: Project):
+        """Do the plugin task."""
         raise NotImplementedError
 
     def save(self):
-        """Returns a JSON-like dict representing the plugin instance config. Used by `Hausse.save()`."""
-        defaults = {k: v.default for k, v in signature(self.__init__).parameters.items() if v.default is not Parameter.empty}
+        """Return a JSON-like dict representing the plugin instance config.
+
+        This method is called by `Hausse.save()`.
+        """
+        defaults = {
+            k: v.default
+            for k, v in signature(self.__init__).parameters.items()
+            if v.default is not Parameter.empty
+        }
         # Return all key-values from the plugin except
         # - technic internal keys (identified by leading underscore)
         # - default values (identified by plugin init signature inspection)
-        # - and empty values corresponding to None defaults (empty lists initialized from None arguments)
-        return {k: v for k, v in self.__dict__.items() if not k.startswith("_") and v != defaults.get(k) and (v or defaults.get(k))}
+        # - and empty values corresponding to None defaults (empty lists)
+        return {
+            k: v
+            for k, v in self.__dict__.items()
+            if not k.startswith("_") and v != defaults.get(k) and (v or defaults.get(k))
+        }
 
 
 class SelectorPlugin(Plugin):
     """
     Plugin template with a Selector parameter.
 
-    Selector can be a file path pattern, an iterator over an Elements list, or any other Selector object.
+    Selector can be a file path pattern, an iterator over an Elements list, or
+    any other Selector object.
     """
 
-    def __init__(self, selector: Union[str, Iterable, Selector], selector_by_default = None):
+    def __init__(
+        self, selector: Union[str, Iterable, BaseSelector], selector_by_default=None
+    ):
         self.selector = Selector(selector or selector_by_default)
         self._selector_by_default = selector_by_default
 
     def save(self):
         d = super().save()
         if self.selector == self._selector_by_default:
-            del d['selector']
+            del d["selector"]
         else:
-            d['selector'] = d['selector'].save()
+            d["selector"] = d["selector"].save()
         return d
-        
+
+
 class PathPlugin(Plugin):
     """
     Plugin template with a Path parameter.
@@ -63,9 +79,9 @@ class PathPlugin(Plugin):
 
     def save(self) -> dict:
         d = super().save()
-        d['path'] = str(d['path'])
-        if d['path'] == signature(self.__init__).parameters['path'].default:
-            del d['path']
+        d["path"] = str(d["path"])
+        if d["path"] == signature(self.__init__).parameters["path"].default:
+            del d["path"]
         return d
 
 
@@ -74,7 +90,14 @@ class LayoutPlugin(PathPlugin, SelectorPlugin):
     Hausse layout plugin structure
     """
 
-    def __init__(self, path: str = Defaults.LAYOUTS, default: str = None, selector: Union[str, Iterable, Selector] = None, options: dict = None, **kwargs):
+    def __init__(
+        self,
+        path: str = Defaults.LAYOUTS,
+        default: str = None,
+        selector: Union[str, Iterable, Selector] = None,
+        options: dict = None,
+        **kwargs
+    ):
         """
         # TODO: Update documentation
         Parameters

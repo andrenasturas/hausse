@@ -1,7 +1,9 @@
 import logging
 from typing import List
-from hausse.lib import Plugin, Element
+
+from hausse.lib import Element, Plugin
 from hausse.lib.selector import Selector
+
 
 class Metadata(Plugin):
 
@@ -22,18 +24,18 @@ class Metadata(Plugin):
         A dictionnary of metadata elements added to the selected collection.
     replace : bool
         If True, allows the plugin to overwrite existing metadata in elements.
-        
+
     """
 
-    def __init__(self, selection, new_metadata, replace : bool = False):
-        
+    def __init__(self, selection, new_metadata, replace: bool = False):
+
         self.selection = Selector(selection)
         self.new_metadata = new_metadata
         self.replace = replace
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+    def __call__(self, project: Project):
 
-        selection = self.selection(elements, metadata, settings)
+        selection = self.selection(project)
 
         for element in selection:
             for key, value in self.new_metadata.items():

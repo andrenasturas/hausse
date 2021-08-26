@@ -1,9 +1,10 @@
 import glob
-from pathlib import Path, PurePath
 import os
+from pathlib import Path, PurePath
 from typing import List
 
-from hausse.lib import Element, PathPlugin
+from hausse.lib import PathPlugin, Project
+
 
 class DiscoverPartials(PathPlugin):
     """
@@ -14,12 +15,12 @@ class DiscoverPartials(PathPlugin):
         super().__init__(path)
         self.pattern = pattern
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
-        
-        settings['partials'] = dict()
+    def __call__(self, project: Project):
+
+        project.settings["partials"] = dict()
 
         for f in self.path.rglob(self.pattern):
 
             with open(f, "r") as p:
 
-                settings['partials'][PurePath(f).stem] = p.read()
+                project.settings["partials"][PurePath(f).stem] = p.read()

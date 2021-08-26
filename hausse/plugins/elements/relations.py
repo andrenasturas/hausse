@@ -1,7 +1,9 @@
 import logging
 from typing import List
-from hausse.lib import SelectorPlugin, Element
+
+from hausse.lib import Element, Project, SelectorPlugin
 from hausse.lib.selector import Selector
+
 
 class Relations(SelectorPlugin):
     """
@@ -15,34 +17,45 @@ class Relations(SelectorPlugin):
     # TODO: Finish documentation
     """
 
-    def __init__(self, selector, collection, key = None):
-        
+    def __init__(self, selector, collection, key=None):
+
         super().__init__(selector)
         self.collection = collection if isinstance(collection, str) else collection.name
         self.key = key
 
+    def __call__(self, project: Project):
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+        if self.collection in project.settings["collections"]:
 
-        if self.collection in settings["collections"]:
+            collection = project.settings["collections"][self.collection]
 
-            collection = settings["collections"][self.collection]
-            
-            for element in self.selector(elements, metadata, settings):
+            for element in self.selector(project):
 
                 key = getattr(element, self.key or self.collection, None)
 
                 if key:
 
                     if isinstance(key, list):
-                        setattr(element, self.key or self.collection, [collection.get(elt, elt) for elt in key])
-                        
+                        setattr(
+                            element,
+                            self.key or self.collection,
+                            [collection.get(elt, elt) for elt in key],
+                        )
+
                     else:
-                        setattr(element, self.key or self.collection, collection.get(key, key))
-        
+                        setattr(
+                            element,
+                            self.key or self.collection,
+                            collection.get(key, key),
+                        )
+
         else:
 
-            if "collections" not in settings:
-                logging.error(f"Relations plugin must be used after Collections plugin.")
+            if "collections" not in project.settings:
+                logging.error(
+                    f"Relations plugin must be used after Collections plugin."
+                )
 
-            logging.error(f"Relations did not found {self.collection} collection in project metadata.")
+            logging.error(
+                f"Relations did not found {self.collection} collection in project metadata."
+            )

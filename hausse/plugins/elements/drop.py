@@ -1,13 +1,14 @@
-from hausse.lib.element import Element
 from typing import List
-from hausse.lib import SelectorPlugin
+
+from hausse.lib import Project, SelectorPlugin
+from hausse.lib.element import Element
+
 
 class Drop(SelectorPlugin):
     """
     Drop specified elements from the current loaded elements.
     """
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
-        for element in list(self.selector(elements, metadata, settings)):
-            elements.remove(element)
-    
+    def __call__(self, project: Project):
+        for element in list(self.selector(project)):
+            project.elements.remove(element)

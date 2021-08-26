@@ -168,7 +168,7 @@ class Hausse(Project):
 
         # Apply all plugins work
         for plugin in self._plugins:
-            plugin(self.elements, self.metadata, self.settings)
+            plugin(self)
 
         # Saving built files
         dist = self.settings.get(Keys.DIST)

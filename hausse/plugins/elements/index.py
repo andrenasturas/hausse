@@ -1,7 +1,9 @@
 import logging
-from typing import List
 from pathlib import Path
-from hausse.lib import Plugin, Element
+from typing import List
+
+from hausse.lib import Element, Plugin, Project
+
 
 class Index(Plugin):
 
@@ -25,13 +27,24 @@ class Index(Plugin):
         Metadata passed to the new index Element.
     """
 
-    def __init__(self, directory : Path = None, filename : str = "index.html", metadata : dict = None, **kwargs):
-        
-        self.directory = Path(directory) or Path(".")
-        self.filename = filename
-        self.metadata = metadata or dict() | kwargs
+    def __init__(
+        self,
+        directory: Path = None,
+        filename: str = "index.html",
+        metadata: dict = None,
+        **kwargs
+    ):
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
+        self.directory: Path = Path(directory) if directory else Path(".")
+        self.filename: str = filename
+        self.metadata: dict = metadata or dict() | kwargs
 
-        elements.append(Element(self.directory / Path(self.filename), global_metadata=metadata, **self.metadata))
-    
+    def __call__(self, project: Project):
+
+        project.elements.append(
+            Element(
+                self.directory / Path(self.filename),
+                global_metadata=project.metadata,
+                **self.metadata
+            )
+        )

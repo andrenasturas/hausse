@@ -16,7 +16,7 @@ In Hausse, all the data of a project is stored in three variables : :envvar:`ele
 
     Elements
         An Element represent usually a file, as each source file is loaded as an Element, and all Element remeining after plugins work are written back as files.
-        
+
         However, this concept can be extended to other things, as in the Records plugin that can create new Elements for each record of a CSV file, which can be used and written as separates files.
 
         The :envvar:`elements` variable is a list of Elements objects, with no specific order.
@@ -37,8 +37,8 @@ In Hausse, plugins are basically Python callables expecting specific variables a
 
 .. code-block:: python
 
-    def foo(elements, metadata, settings):
-        # processing elements and metadata
+    def foo(project: hausse.lib.Project):
+        # processing elements and metadata in project
 
 
 Selectors
@@ -74,7 +74,7 @@ Also, Selectors are compatible with the Save and Rebuild feature shown in the ne
         # Parsing markdown files in articles directory only and copying everything else
         articles = Collection('articles')
         Hausse().use(articles).use(Markdown(articles)).build()
-    
+
 
 Create a fully featured plugin
 ******************************

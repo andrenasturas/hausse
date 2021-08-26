@@ -1,13 +1,11 @@
-import pytest
-
 from pathlib import PurePath
 
-from hausse.plugins import Collections, Collection
-from hausse.lib import Element
+import pytest
+from hausse.lib import Element, Project
+from hausse.plugins import Collection, Collections
 
 
 def test_collection_add():
-    
 
     d1 = Element(PurePath("a/b/c"))
 
@@ -23,15 +21,12 @@ def test_collections_init():
 
     # TODO: test more accurately pattern matching
 
-    c = Collections({
-        "test_a": {
-            "pattern": "a/**/*"
-        },
-        "test_a/b": {
-            "pattern": "a/b/*",
-            "reverse": True
+    c = Collections(
+        {
+            "test_a": {"pattern": "a/**/*"},
+            "test_a/b": {"pattern": "a/b/*", "reverse": True},
         }
-    })
+    )
 
     assert len(c.collections) == 2
 
@@ -41,37 +36,32 @@ def test_collections_call():
     # TODO: Test Collections sub-methods instead of main call method
     # TODO: Test more accurately collection members indexing and sorting
 
-    elements = []
-    settings = dict()
-    metadata = dict()
+    project = Project()
 
-    d1 = Element(PurePath("a/b/c"), global_metadata=metadata)
-    d2 = Element(PurePath("a/b/f"), global_metadata=metadata)
-    d3 = Element(PurePath("a/k/c"), global_metadata=metadata)
-    d4 = Element(PurePath("a/b/d/c"), global_metadata=metadata)
+    d1 = Element(PurePath("a/b/c"), global_metadata=project.metadata)
+    d2 = Element(PurePath("a/b/f"), global_metadata=project.metadata)
+    d3 = Element(PurePath("a/k/c"), global_metadata=project.metadata)
+    d4 = Element(PurePath("a/b/d/c"), global_metadata=project.metadata)
 
-    elements.append(d1)
-    elements.append(d2)
-    elements.append(d3)
-    elements.append(d4)
+    project.elements.append(d1)
+    project.elements.append(d2)
+    project.elements.append(d3)
+    project.elements.append(d4)
 
-    c = Collections({
-        "test_a": {
-            "selector": "**/c"
-        },
-        "test_b": {
-            "selector": "a/b/*",
-            "reverse": True
+    c = Collections(
+        {
+            "test_a": {"selector": "**/c"},
+            "test_b": {"selector": "a/b/*", "reverse": True},
         }
-    })
+    )
 
-    c(elements, metadata, settings)
+    c(project)
 
     # Check plugin settings entry
-    assert "collections" in settings
+    assert "collections" in project.settings
 
-    c1 = settings.get("collections", {}).get("test_a")
-    c2 = settings.get("collections", {}).get("test_b")
+    c1 = project.settings.get("collections", {}).get("test_a")
+    c2 = project.settings.get("collections", {}).get("test_b")
 
     # Check collection creation
     assert isinstance(c1, Collection)
@@ -91,8 +81,8 @@ def test_collections_call():
     assert str(c2) not in getattr(d4, "collections", [])
 
     # Check global metadata binding
-    assert metadata.get("test_a") == c1
-    assert metadata.get("test_b") == c2
+    assert project.metadata.get("test_a") == c1
+    assert project.metadata.get("test_b") == c2
 
     # Check global metadata access
     assert getattr(d4, "test_b") == c2

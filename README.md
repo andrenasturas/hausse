@@ -2,6 +2,9 @@
 
 Hausse is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
 
+
+![https://img.shields.io/pypi/v/hausse](https://pypi.org/project/hausse/) [![GitHub top language](https://img.shields.io/github/languages/top/andrenasturas/hausse)](https://github.com/andrenasturas/hausse/search?l=python) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/andrenasturas/hausse) [https://img.shields.io/github/issues/andrenasturas/hausse/bug](https://github.com/andrenasturas/hausse/labels/bug) [https://img.shields.io/github/license/andrenasturas/hausse](https://github.com/andrenasturas/hausse/blob/main/LICENSE) [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/andrenasturas/hausse)](https://codeclimate.com/github/andrenasturas/hausse) [![Read the Docs](https://img.shields.io/readthedocs/hausse)](https://hausse.readthedocs.io)
+
 ## Installation
 
 ```bash
@@ -62,16 +65,11 @@ Here are a few examples to illustrate the possibilities offered by Hausse and to
 
 Nothing more simple ! Writing a new plugin for Hausse is very easy. A Plugin is nothing more than a python object with a specific `__call__` method.
 
-When `build()` is called on a Hausse project, all Plugins are successively _called_ as functions with the same arguments :
+When `build()` is called on a Hausse project, all Plugins are successively _called_ as functions with the `Hausse` project object itself as an argument. Its attributes contains everything needed by the plugins:
 
 - `elements` is a **Element** list. A **Element** represents a file, with its own metadata accessible as object attributes, and content stored in `._contents` attribute.
 - `metadata` is a dictionary of global metadata.
 - `settings` is a dictionary of technical objects, deposited by some Plugins to be easily usable by others plugins.
-
-```python
-for plugin in plugins:
-    plugin(elements, metadata, settings)
-```
 
 You may also implement the `__init__` method as you wish to store Plugin parameters that will be needed during the build.
 

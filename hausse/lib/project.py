@@ -30,9 +30,9 @@ class Project(object):
     ):
 
         # Data
-        self.elements = elements or list()
-        self.metadata = metadata or dict()
-        self.settings = Defaults.SETTINGS | (settings or dict()) | kwargs
+        self.elements: list = elements or list()
+        self.metadata: dict = metadata or dict()
+        self.settings: dict = Defaults.SETTINGS | (settings or dict()) | kwargs
 
         # Metadata
         for k, v in kwargs.items():

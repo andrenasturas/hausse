@@ -1,8 +1,8 @@
 from typing import List
-from markdown2 import markdown
 
-from hausse.lib import SelectorPlugin, Element
+from hausse.lib import Project, SelectorPlugin
 from hausse.lib.selector import Extensions
+from markdown2 import markdown
 
 
 class Markdown(SelectorPlugin):
@@ -20,17 +20,26 @@ class Markdown(SelectorPlugin):
         Extras settings passed to the markdown processor.
     """
 
-    default_extras = ['cuddled-lists', 'fenced-code-blocks', 'footnotes', 'header-ids', 'markdown-in-html', 'metadata', 'noreferrer', 'tag-friendly', 'task_list']
+    default_extras = [
+        "cuddled-lists",
+        "fenced-code-blocks",
+        "footnotes",
+        "header-ids",
+        "markdown-in-html",
+        "metadata",
+        "noreferrer",
+        "tag-friendly",
+        "task_list",
+    ]
 
-    def __init__(self, selection = None, extras: List[str] = None):
+    def __init__(self, selection=None, extras: List[str] = None):
 
         super().__init__(selection, Extensions("md", "markdown"))
         self.extras = extras
 
+    def __call__(self, project: Project):
 
-    def __call__(self, elements: List[Element], metadata: dict, settings: dict):
-
-        for element in self.selector(elements, metadata, settings):
+        for element in self.selector(project):
             m = markdown(element._contents, extras=self.extras or self.default_extras)
             element._contents = str(m)
             element._update_metadata(m.metadata)

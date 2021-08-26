@@ -1,8 +1,9 @@
-from json import dumps
 from abc import ABC, abstractmethod
-from pathlib import Path
-from typing import Iterable
 from inspect import isclass
+from typing import Iterable
+
+from .project import Project
+
 
 class BaseSelector(ABC):
     @abstractmethod
@@ -11,7 +12,7 @@ class BaseSelector(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def __call__(self, elements: list, metadata: dict, settings: dict):
+    def __call__(self, project: Project):
         """Plugin work"""
         raise NotImplementedError
 
@@ -27,49 +28,62 @@ class BaseSelector(ABC):
 
 
 class Pattern(BaseSelector):
-
     def __init__(self, pattern):
         self.selection = pattern
 
-    def __call__(self, elements: list, metadata: dict, settings: dict):
-        return (element for element in elements if element._path.match(self.selection))
-
-class Extensions(BaseSelector):
-    
-    def __init__(self, *extensions):
-        # As we compare filename extensions, we can rely on `.lower()` without considering special unicode combinaisons
-        self.selection = list(map(lambda x: x.lstrip(".").lower(), extensions))
-
-    def __call__(self, elements: list, metadata: dict, settings: dict):
+    def __call__(self, project: Project):
         return (
             element
-            for element in elements
+            for element in project.elements
+            if element._path.match(self.selection)
+        )
+
+
+class Extensions(BaseSelector):
+    def __init__(self, *extensions):
+        # As we compare filename extensions, we can rely on `.lower()` without
+        # considering special unicode combinaisons
+        self.selection = list(map(lambda x: x.lstrip(".").lower(), extensions))
+
+    def __call__(self, project: Project):
+        return (
+            element
+            for element in project.elements
             if element._path.suffix.lstrip(".").lower() in self.selection
         )
+
 
 class Elements(BaseSelector):
     def __init__(self, elements):
         self.selection = elements
 
-    def __call__(self, elements: list, metadata: dict, settings: dict):
+    def __call__(self, project: Project):
         return iter(self.selection)
+
 
 class Collection(BaseSelector):
     def __init__(self, collection):
+
         self.selection = collection
-    
-    def __call__(self, elements: list, metadata: dict, settings: dict):
-        return iter(settings['collections'][self.selection])
+
+    def __call__(self, project: Project):
+        return iter(project.settings["collections"][self.selection])
+
 
 class All(BaseSelector):
-    def __init__(self, _ = None):
+    def __init__(self, _=None):
         self.selection = "all"  # Used only for json save
-    
-    def __call__(self, elements: list, metadata: dict, settings: dict):
-        return iter(elements)
+
+    def __call__(self, project: Project):
+        return iter(project.elements)
 
 
-selectors = {k.lower(): v for k, v in globals().items() if isclass(v) and v.__module__ == "hausse.lib.selector" and k != "BaseSelector"}
+selectors = {
+    k.lower(): v
+    for k, v in globals().items()
+    if isclass(v) and v.__module__ == "hausse.lib.selector" and k != "BaseSelector"
+}
+
 
 def Selector(selection) -> BaseSelector:
 
