@@ -1,18 +1,19 @@
 """Hausse main module."""
 
-import logging
 import json
-import yaml
+import logging
 import os
 from importlib import import_module
+from pathlib import Path
 from typing import Callable, Iterable, Union
 
-from .lib import Element
-from .utils import clean_dir, Keys, Defaults
-from pathlib import Path
+import yaml
+
+from .lib import Element, Project
+from .utils import Defaults, Keys, clean_dir
 
 
-class Hausse(object):
+class Hausse(Project):
     """
     Hausse
     ======
@@ -29,6 +30,12 @@ class Hausse(object):
 
     Note also that all Hausse's method returns `self`, for convenient methods
     call chaining.
+
+    Hausse object represents at any time the state of the project just before
+    the copy to the output directory. Besides the plugins, it contains a list
+    of processed files, global metadata usable by plugins and settings data
+    used by some plugins relying on previous plugins work. This part is
+    inherited from `hausse.lib.Project` parent class.
 
     Parameters
     ----------
@@ -70,6 +77,10 @@ class Hausse(object):
         Global metadata accessible from any Element.
     settings : dict
         Technical storage dictionary for plugins interactions.
+
+    .. note::
+        Via inherited `Project.__getattr__` method, `metadata` content is also
+        accessible as `Hausse` attributes for convenient usage.
     """
 
     def __init__(
@@ -81,13 +92,11 @@ class Hausse(object):
         **kwargs,
     ):
 
+        # Project init
+        super().__init__(elements, metadata, settings, **kwargs)
+
         # Loaded plugins list
         self._plugins: list[Callable] = list()
-
-        # Data
-        self.elements = elements or list()
-        self.metadata = metadata or dict()
-        self.settings = Defaults.SETTINGS | (settings or dict()) | kwargs
 
         # Base directory
         base_path = Path(base_dir) if base_dir else Path(Defaults.BASE)
