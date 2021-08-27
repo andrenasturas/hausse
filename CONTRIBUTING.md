@@ -32,7 +32,9 @@ If all of this is new to you, feel free to consult [the language documentation](
 
 First clone the repository:
 
-```$ git clone https://github.com/andrenasturas/hausse.git```
+```bash
+git clone https://github.com/andrenasturas/hausse.git
+```
 
 Then install the dependencies. It is recommended to do so inside a [virtual environnement](https://docs.python.org/3/tutorial/venv.html).
 
