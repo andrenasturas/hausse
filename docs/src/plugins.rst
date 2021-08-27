@@ -6,7 +6,7 @@ Plugins already provided by Hausse are presented on the Hausse project website a
 How it works
 ************
 
-In Hausse, all the data of a project is stored in three variables : :envvar:`elements`, :envvar:`metadata` and :envvar:`settings`.
+In **hausse**, all the data of a project is stored in three variables : :envvar:`elements`, :envvar:`metadata` and :envvar:`settings`.
 
 .. warning::
     The three variables shape may evolve until the first stable release of Hausse. They may be stored in a single special structure.
@@ -81,4 +81,4 @@ Create a fully featured plugin
 
 Usually, plugins are implemented as classes inheriting from ``Plugin`` or one of its subclasses. This implementation standardize plugins, simplify some recurrent behaviors, and may allow in the future more extensive use of plugins, like performance analysis and debugging.
 
-A fully implemented Plugin should at least be instantiable and callable with the three arguments :envvar:`elements`, :envvar:`metadata` and :envvar:`settings`.
+A fully implemented Plugin should at least be instantiable and callable with a :py:class:`hausse.lib.Project` argument.

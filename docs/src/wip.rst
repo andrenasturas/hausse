@@ -1,12 +1,7 @@
 Future
 ######
-   
+
 This page evokes some topics that are in the backlog of Hausse project.
-
-Structure hardening
-*******************
-
-The current primary objective is to determine the best way to handle the context data (the current elements-metadata-settings triplet). When the final decision will be made about this, the first officially stable release of Hausse will be possible.
 
 Easy project bootstraping
 *************************

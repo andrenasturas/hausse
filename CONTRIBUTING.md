@@ -77,7 +77,7 @@ Pick an open issue in the [issue tracker](https://github.com/andrenasturas/hauss
 
 ### Good first issues
 
-You are a beginner looking for interesting first issues ? You can look for [`good-first-issues` labelled issues](https://github.com/andrenasturas/hausse/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
+You are a beginner looking for interesting first issues ? You can look for [`good-first-issues` labelled issues](https://github.com/andrenasturas/hausse/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22). You can also propose changes improving code quality.
 
 ## Improve the documentation
 

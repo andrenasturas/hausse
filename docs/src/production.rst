@@ -6,12 +6,12 @@ Once your project is setup, the next step is to prepare the production workflow,
 Save and Rebuild
 ****************
 
-The Python script you wrote is useful to design your website, but when the design is done, it is no longer necessary. Instead, you can save your project to a JSON file, and use it directly from the console.
+The Python script you wrote is useful to design your website, but when the conception is done, it is no longer necessary. Instead, you can save your project to a JSON file, and use it directly from the console.
 
 .. warning:: Custom plugins are not supported by the Save and Rebuild feature. If necessary, you have to stick to the design script and run it with python.
 
 
-To do so, call the :py:func:`save` method on your project. The setting file name is ``hausse.json`` by default.
+To do so, call the :py:func:`Hausse.save` method on your project. The setting file name is ``hausse.json`` by default.
 
 Rebuilding from the console is done by running the Hausse module with the :option:`--build` argument:
 
