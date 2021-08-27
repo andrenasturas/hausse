@@ -1,6 +1,6 @@
-# Contributing to Hausse
+# Contributing to hausse
 
-Welcome here! Hausse is a little first project, originally intended for the creation of static web sites, but which seeks to be as versatile as possible. Feel free to contribute with new features and use cases!
+Welcome here! **hausse** is a little first project, originally intended for the creation of static web sites, but which seeks to be as versatile as possible. Feel free to contribute with new features and use cases!
 
 - [Report bugs and request new features](#report-bugs-and-request-new-features)
 - [Get started with the source code](#get-started-with-the-source-code)
@@ -22,7 +22,7 @@ For bugs, please include exhaustive informations about your operating system and
 
 ## Get started with the source code
 
-Hausse runs on Python 3.9. You can check your version by typing `python -V` in a console.
+**hausse** runs on Python 3.9. You can check your version by typing `python -V` in a console.
 
 ### Begin from the start
 
@@ -30,26 +30,28 @@ If all of this is new to you, feel free to consult [the language documentation](
 
 ### Workspace setup
 
-Fisrt clone the repository:
+First clone the repository:
 
 ```$ git clone https://github.com/andrenasturas/hausse.git```
 
 Then install the dependencies. It is recommended to do so inside a [virtual environnement](https://docs.python.org/3/tutorial/venv.html).
 
-```
-$ cd hausse
-$ python -m venv .venv
-$ source .venv/bin/activate
-$ pip install -r requirements.txt
+```bash
+cd hausse
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 And then you are ready to code!
 
 ### Tests
 
-In Hausse, testing is done with [`pytest`](https://pytest.org) library. You can run test with this command:
+In **hausse**, testing is done with [`pytest`](https://pytest.org) library. You can run tests with this command:
 
-```$ python -m pytest```
+```bash
+python -m pytest
+```
 
 ### Conventions
 
@@ -67,7 +69,6 @@ Before launching your pull request, make sure to check these little conditions:
 - [x] Documentation is updated accordingly
 - [x] Code conventions are followed at best
 
-
 ## Fix bugs or implement features
 
 Pick an open issue in the [issue tracker](https://github.com/andrenasturas/hausse/issues), [fork](https://github.com/andrenasturas/hausse/fork) the repository, [get started](#get-started) with a development workspace on your forked repository, commit your contribution and initiate a pull request on the issue.
@@ -78,9 +79,9 @@ You are a beginner looking for interesting first issues ? You can look for [`goo
 
 ## Improve the documentation
 
-- You found a spot of documentation a bit unclear ?
-- You would like to translate the guide ?
-- Some method does not have its proper docstring ?
-- You have an idea of a new sensible and simple use case example ?
+- You found a spot of documentation a bit unclear?
+- You would like to translate the guide?
+- Some method does not have its proper docstring?
+- You have an idea of a new sensible and simple use case example?
 
 Your help is very welcome. There is no such thing as overdocumented!
