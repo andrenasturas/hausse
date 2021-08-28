@@ -86,4 +86,4 @@ You are a beginner looking for interesting first issues ? You can look for [`goo
 - Some method does not have its proper docstring?
 - You have an idea of a new sensible and simple use case example?
 
-Your help is very welcome. There is no such thing as overdocumented!
+Your help is very welcome. There is no such thing as overdocumented! You can create pull requests for improving `.rst` files, which are sources files of the documentation. The localization is handled by [Transifex](https://www.transifex.com/andrenasturas/hausse), where you can create an account and provide translations.
