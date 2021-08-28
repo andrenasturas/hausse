@@ -71,7 +71,7 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 language = "en"
-locale_dirs = ["locale/"]
+locale_dirs = ["locales/"]
 gettext_uuid = True
 gettext_compact = False
 
