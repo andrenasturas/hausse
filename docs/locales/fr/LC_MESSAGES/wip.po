@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, André Nasturas
+# This file is distributed under the same license as the Hausse package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Hausse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-27 19:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../src/wip.rst:2 c4a83a90a7134880bd16f70b0bf7e17c
+msgid "Future"
+msgstr ""
+
+#: ../../src/wip.rst:4 a2d983c18e364545a2dbee49dc6bf1df
+msgid "This page evokes some topics that are in the backlog of Hausse project."
+msgstr ""
+
+#: ../../src/wip.rst:7 8aa2657ac0d84f62b4642654d8771f82
+msgid "Easy project bootstraping"
+msgstr ""
+
+#: ../../src/wip.rst:9 4796eabe83cc438a867fd4264db0d6f2
+msgid ""
+"**hausse** is designed to be a very simple static website generator. It "
+"should be able to help users to kickstart theirs project as quick as "
+"possible, by offering one-click hello-world scripts, and even a "
+"interactive interface suggesting the most used and appropriate plugins to"
+" use."
+msgstr ""
+
+#: ../../src/wip.rst:12 5e75e2e85b434af9a348db715f63a1b8
+msgid "New plugins"
+msgstr ""
+
+#: ../../src/wip.rst:14 7a7d9dbdfb304134aba373140b78a634
+msgid "Multi-language websites and internationalization enabling plugin"
+msgstr ""
+
+#: ../../src/wip.rst:15 a309f37d400d4e408c81dccd5a35b64e
+msgid "Images and media handling plugin"
+msgstr ""
+
+#: ../../src/wip.rst:16 1640d35f1e814c90ad60ba0a67069908
+msgid "Content auto-publication plugin"
+msgstr ""
+
+#~ msgid "Structure hardening"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The current primary objective is to "
+#~ "determine the best way to handle "
+#~ "the context data (the current "
+#~ "elements-metadata-settings triplet). When "
+#~ "the final decision will be made "
+#~ "about this, the first officially stable"
+#~ " release of Hausse will be possible."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Hausse is designed to be a very"
+#~ " simple static website generator. It "
+#~ "should be able to help users to"
+#~ " kickstart tehirs project as quick as"
+#~ " possible, by offering one-click "
+#~ "hello-world scripts, and even a "
+#~ "interactive interface suggesting the most "
+#~ "used and appropriate plugins to use."
+#~ msgstr ""
+

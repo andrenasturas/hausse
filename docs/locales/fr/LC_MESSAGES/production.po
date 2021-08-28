@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, André Nasturas
+# This file is distributed under the same license as the Hausse package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Hausse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-27 19:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../src/production.rst:2 8a45f0bf83314c47b3bb5edcc95afc00
+msgid "Production"
+msgstr ""
+
+#: ../../src/production.rst:4 92ad27f550024a3f87b8bc5e6e2510fa
+msgid ""
+"Once your project is setup, the next step is to prepare the production "
+"workflow, i.e. automate the build and publication."
+msgstr ""
+
+#: ../../src/production.rst:7 1b267c49fe8d4965ba721cca22f8586c
+msgid "Save and Rebuild"
+msgstr ""
+
+#: ../../src/production.rst:9 3bb1f9cfd0e7469f8042cbde237f718c
+msgid ""
+"The Python script you wrote is useful to design your website, but when "
+"the conception is done, it is no longer necessary. Instead, you can save "
+"your project to a JSON file, and use it directly from the console."
+msgstr ""
+
+#: ../../src/production.rst:11 9a656fca1cd341578d1636c81c83d6fa
+msgid ""
+"Custom plugins are not supported by the Save and Rebuild feature. If "
+"necessary, you have to stick to the design script and run it with python."
+msgstr ""
+
+#: ../../src/production.rst:14 812385f8435d4d4b8099cd3b30f27f98
+msgid ""
+"To do so, call the :py:func:`Hausse.save` method on your project. The "
+"setting file name is ``hausse.json`` by default."
+msgstr ""
+
+#: ../../src/production.rst:16 03c3b2be229a4d36b50090ac26b84889
+msgid ""
+"Rebuilding from the console is done by running the Hausse module with the"
+" :option:`--build` argument:"
+msgstr ""
+
+#: ../../src/production.rst:22 5d20acfa63104bb5b8f7f0fdcb9c8754
+msgid ""
+"You can skip the file  argument if one with a default name is present in "
+"current directory."
+msgstr ""
+
+#: ../../src/production.rst:26 ed3631df6fb94b7ca4d6a0c9fa6d842b
+msgid "Publish"
+msgstr ""
+
+#: ../../src/production.rst:28 0faf4b10e51c4283815a38454dacdf1e
+msgid ""
+"You are now able to build your static website on-demand via a single "
+"command. While you can put the built static HTML files on a web server, "
+"you can also take advantage of this easy build process to use services "
+"such as `GitLab Pages <https://docs.gitlab.com/ee/user/project/pages/>`_ "
+"or `GitHub Pages <https://pages.github.com/>`_."
+msgstr ""
+
+#: ../../src/production.rst:30 eafc89b0890f40d4940a6f1dd9937582
+msgid "Example of GitLab Pages workflow:"
+msgstr ""
+
+#: ../../src/production.rst:53 657428d47cb64551973a761af32780a4
+msgid ""
+"GitLab looking for Pages files in a directory named ``public``, you "
+"should use the argument :option:`--dist` to fix the output directory "
+"accordingly. This is equivalent to adding ``.destination('public')`` in "
+"the design script."
+msgstr ""
+
+#~ msgid ""
+#~ "The Python script you wrote is "
+#~ "useful to design your website, but "
+#~ "when the design is done, it is "
+#~ "no longer necessary. Instead, you can"
+#~ " save your project to a JSON "
+#~ "file, and use it directly from the"
+#~ " console."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To do so, call the :py:func:`save` "
+#~ "method on your project. The setting "
+#~ "file name is ``hausse.json`` by default."
+#~ msgstr ""
+

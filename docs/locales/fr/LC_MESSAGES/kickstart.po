@@ -1,0 +1,195 @@
+# Copyright (C) 2021, André Nasturas
+# This file is distributed under the same license as the Hausse package.
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+# André Nasturas <andre.nasturas@delfosia.net>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: Hausse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-27 19:50+0200\n"
+"PO-Revision-Date: 2021-08-27 20:26+0200\n"
+"Last-Translator: André Nasturas <andre.nasturas@delfosia.net>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.08.0\n"
+
+#: ../../src/kickstart.rst:2 dc68079557e1481590479d47686e649c
+#, fuzzy
+msgid "Core features"
+msgstr "Fonctionnalités principales"
+
+#: ../../src/kickstart.rst:4 474e529ec762434d99cff5973e0f16d4
+#, fuzzy
+msgid ""
+"This page will walk you through the design of a rudimentary but "
+"functional site, starting from the hello-world project stated previously,"
+" and discovering in the process some of the core features of **hausse**."
+msgstr ""
+"Cette page vous guidera pour la conception d'un site rudimentaire mais"
+" fonctionnel, en partant du projet de base établi précédemment et découvrant"
+" au passage certaines des fonctionnalités principales de **hausse**."
+
+#: ../../src/kickstart.rst:7 89fc14003caa4081a3c14a2680fc17de
+#, fuzzy
+msgid "Main settings"
+msgstr "Réglages principaux"
+
+#: ../../src/kickstart.rst:9 63b98c407a2f44888ad14fe78ad6204f
+#, fuzzy
+msgid ""
+"By default, **hausse** works in the current directory, looks for sources "
+"files in ``src/`` folder and write final results in ``dist/`` folder. You"
+" can change this if necessary."
+msgstr ""
+"Par défaut, **hausse** opère dans le dossier courant, recherche les fichiers"
+" sources dans le dossier ``src/`` et écrit les résultats finaux dans le"
+" dossier ``dist/``. Vous pouvez changer cela si nécessaire."
+
+#: ../../src/kickstart.rst:17 ad49f79dcbd94963953b393e05424c35
+#, fuzzy
+msgid ""
+"Project path is relative to the current execution path. All others paths "
+"are relative to the project path."
+msgstr ""
+"Le chemin du projet est relatif au chemin d'exécution actuel. Tous les autres"
+" chemins sont relatifs au chemin du projet."
+
+#: ../../src/kickstart.rst:20 d0ecef4ebe4c4895981a635349455d16
+#, fuzzy
+msgid "Templating"
+msgstr "Modèles"
+
+#: ../../src/kickstart.rst:22 333fac0166a74fb1bd015f61d985692c
+#, fuzzy
+msgid "Create a layout in ``layouts/layout.hbs``:"
+msgstr "Créez une disposition dans ``layouts/layout.hbs`` :"
+
+#: ../../src/kickstart.rst:35 4be71cbecad6449fb31fd290e7eb0e46
+#, fuzzy
+msgid "And then, add the **Handlebars** layout plugin to the Hausse project."
+msgstr "Ensuite, ajoutez le plugin de disposition **Handlebars** au projet."
+
+#: ../../src/kickstart.rst:49 cd2984d603c148059efb53545935c5f5
+#, fuzzy
+msgid ""
+"The output ``dist/index.html`` file is now your Markdown content rendered"
+" in HTML and embedded into your template."
+msgstr ""
+"Le fichier de sortie ``dist/index.html`` représente maintenant votre contenu"
+" Markdown rendu en HTML et intégré dans votre modèle."
+
+#: ../../src/kickstart.rst:52 458f825b2efc4180ba4c5838a7141c64
+#, fuzzy
+msgid ""
+"It is possible to chain Hausse's method calls to write a more compact "
+"code."
+msgstr ""
+"Il est possible d'enchaîner les appels aux méthodes de Hausse pour écrire un"
+" code plus compact."
+
+#: ../../src/kickstart.rst:59 43628a8daf544ca7a54c7239a5419a27
+#, fuzzy
+msgid "Metadata"
+msgstr "Métadonnées"
+
+#: ../../src/kickstart.rst:61 5ec9d357acb2402493c11ee6ada9f54c
+#, fuzzy
+msgid ""
+"One important and useful concept in **hausse** is metadata. Plugin can "
+"add and use them on processed files. For example, **Markdown** plugin can"
+" read `YAML front matter <https://assemble.io/docs/YAML-front-"
+"matter.html>`_ of Markdown files."
+msgstr ""
+"Les métadonnées sont un concept important et utile dans **hausse**. Les"
+" plugins peuvent en ajouter et en modifier dans les fichiers traités. Par"
+" exemple, le plugin **Markdown** peut lire `l'entête YAML <"
+"https://assemble.io/docs/YAML-front-matter.html>`_ des fichiers Markdown."
+
+#: ../../src/kickstart.rst:63 89ef56a9edb34acdb18442b5e7938886
+#, fuzzy
+msgid "Edit ``src/index.md`` to add metadata:"
+msgstr "Modifiez ``src/index.md`` pour ajouter des métadonnées :"
+
+#: ../../src/kickstart.rst:76 75991d87b8544d9bbdde07d660a3a56a
+#, fuzzy
+msgid "Modify the template to make use of these metadata."
+msgstr "Modifiez le modèle pour faire usage de ces métadonnées."
+
+#: ../../src/kickstart.rst:93 bc956cf967f243e4b7694c25e742965c
+#, fuzzy
+msgid "Collections"
+msgstr "Collections"
+
+#: ../../src/kickstart.rst:95 84891ed76f244075931ed30497c86bb7
+#, fuzzy
+msgid ""
+"One last very common concept often used: the Collections. They can be "
+"used to manage blog posts, tag lists, galleries, and any set of elements "
+"on your site."
+msgstr ""
+"Un dernier concept très courant : les Collections. Elles peuvent être"
+" utilisés pour gérer des billets de blog, des listes d'étiquettes, des"
+" galeries et n'importe quel ensemble d'éléments sur votre site."
+
+#: ../../src/kickstart.rst:97 6898844c09d448f39584f86b5ea4e025
+#, fuzzy
+msgid ""
+"Create a folder ``articles`` in you source directory, and write some "
+"articles into it. For example, in ``./src/articles/first-post.md``:"
+msgstr ""
+"Créez un dossier ``articles`` dans votre dossier source, et écrivez-y"
+" quelques articles. Par exemple, dans ``./src/articles/first-post.md`` :"
+
+#: ../../src/kickstart.rst:108 10ee38f6d00d426cbd750171811b7915
+#, fuzzy
+msgid "Then, summon the Collection plugin."
+msgstr "Puis, invoquez le plugin **Collection**."
+
+#: ../../src/kickstart.rst:123 228d48e1fcee4712bde783e7b9ca7ab6
+#, fuzzy
+msgid ""
+"Finally, modify your index template to list your articles on your main "
+"page."
+msgstr ""
+"Enfin, modifiez votre modèle d'index pour lister vos articles sur votre page"
+" d'accueil."
+
+#~ msgid ""
+#~ "This page will walk you through "
+#~ "the design of a rudimentary but "
+#~ "functional site, starting from the "
+#~ "hello-world project stated previously, and"
+#~ " discovering in the process some of"
+#~ " the core features of Hausse."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "By default, Hausse works in the "
+#~ "current directory, looks for sources "
+#~ "files in ``src/`` folder and write "
+#~ "final results in ``dist/`` folder. You"
+#~ " can change this if necessary."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Hausse project path is relative to "
+#~ "the current execution path. All others"
+#~ " paths are relative to this one."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "One important and useful concept in "
+#~ "Hausse is metadata. Plugin can add "
+#~ "and use them on processed files. "
+#~ "For example, **Markdown** plugin can "
+#~ "read `YAML front matter "
+#~ "<https://assemble.io/docs/YAML-front-matter.html>`_ "
+#~ "of Markdown files."
+#~ msgstr ""
+

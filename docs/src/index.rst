@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hausse
+hausse
 ######
 
-Hausse is a project generator, mainly used to build static websites, written in Python. It works with plugins that can be chained to process files and produce the wanted result.
+**hausse** is a project generator, mainly used to build static websites, written in Python. It works with plugins that can be chained to process files and produce the wanted result.
 
 
 Getting Started

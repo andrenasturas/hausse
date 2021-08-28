@@ -1,10 +1,10 @@
 Getting Started
 ###############
 
-What is Hausse?
+What is hausse?
 ***************
 
-Hausse is a modular project generator, mainly used to build static websites. It collects files from a source folder, process them using a chosen set of plugins, and write them into an output folder.
+**hausse** is a modular project generator, mainly used to build static websites. It collects files from a source folder, process them using a chosen set of plugins, and write them into an output folder.
 
 .. note::
    Hausse plugin-based behaviour is similar to the NodeJS project `Metalsmith <https://metalsmith.io>`_.
@@ -27,7 +27,7 @@ In order to generate static websites, you will probably need additional packages
 * `pybars3 <https://pypi.org/project/pybars3>`_ for Handlebars templates
 
 Due to the versatility of Hausse, these dependencies are optional and are not automatically installed with it.
-   
+
 Hello world
 ***********
 

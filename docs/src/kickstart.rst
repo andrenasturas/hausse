@@ -1,12 +1,12 @@
 Core features
 #############
 
-This page will walk you through the design of a rudimentary but functional site, starting from the hello-world project stated previously, and discovering in the process some of the core features of Hausse.
+This page will walk you through the design of a rudimentary but functional site, starting from the hello-world project stated previously, and discovering in the process some of the core features of **hausse**.
 
 Main settings
 *************
 
-By default, Hausse works in the current directory, looks for sources files in ``src/`` folder and write final results in ``dist/`` folder. You can change this if necessary.
+By default, **hausse** works in the current directory, looks for sources files in ``src/`` folder and write final results in ``dist/`` folder. You can change this if necessary.
 
 .. code-block:: python
 
@@ -14,7 +14,7 @@ By default, Hausse works in the current directory, looks for sources files in ``
     project.source('rel/to/project/sources')
     project.destination('rel/to/project/sources')
 
-Hausse project path is relative to the current execution path. All others paths are relative to this one.
+Project path is relative to the current execution path. All others paths are relative to the project path.
 
 Templating
 **********
@@ -58,7 +58,7 @@ The output ``dist/index.html`` file is now your Markdown content rendered in HTM
 Metadata
 ********
 
-One important and useful concept in Hausse is metadata. Plugin can add and use them on processed files. For example, **Markdown** plugin can read `YAML front matter <https://assemble.io/docs/YAML-front-matter.html>`_ of Markdown files.
+One important and useful concept in **hausse** is metadata. Plugin can add and use them on processed files. For example, **Markdown** plugin can read `YAML front matter <https://assemble.io/docs/YAML-front-matter.html>`_ of Markdown files.
 
 Edit ``src/index.md`` to add metadata:
 
@@ -141,4 +141,3 @@ Finally, modify your index template to list your articles on your main page.
             </ul>
         </body>
     </html>
- 
