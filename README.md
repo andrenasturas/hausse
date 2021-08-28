@@ -1,7 +1,8 @@
 # hausse
 
-**hausse** is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
+<img align="right" src="https://static.delfosia.net/hausse.png"/>
 
+**hausse** is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
 
 ## Installation
 
