@@ -6,3 +6,11 @@ reference:
   artifacts:
     paths:
       - docs/src/ref/*
+
+locales push:
+  stage: Documentation
+  script:
+    - pip install -U transifex-client
+    - tx init --token ${TRANSIFEX_TOKEN} --no-interactive
+    - tx config mapping-bulk --project hausse --file-extension '.pot' --source-file-dir docs/_build/gettext --source-lang en --type PO --expression 'locales/<lang>/LC_MESSAGES/{filepath}/{filename}.po' --execute
+    - tx push --source
