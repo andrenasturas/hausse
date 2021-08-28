@@ -1,21 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2021, André Nasturas
 # This file is distributed under the same license as the Hausse package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# André Nasturas <transifex@an.delfosia.net>, 2021
+# 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Hausse \n"
+"Project-Id-Version: Hausse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-27 19:50+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2021-08-28 16:34+0000\n"
+"Last-Translator: André Nasturas <transifex@an.delfosia.net>, 2021\n"
+"Language-Team: French (https://www.transifex.com/andrenasturas/teams/124287/fr/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../../src/plugins.rst:2 e61ffb28e5d44e6fa9dfdab4fb9254c0
 msgid "Plugins"
@@ -24,8 +28,8 @@ msgstr ""
 #: ../../src/plugins.rst:4 4e781f6ab4cf4727989fe56a0375c96e
 msgid ""
 "Plugins already provided by Hausse are presented on the Hausse project "
-"website and documented in the reference section. The article below "
-"describes how to create new plugins."
+"website and documented in the reference section. The article below describes"
+" how to create new plugins."
 msgstr ""
 
 #: ../../src/plugins.rst:7 5f71a87874ae49b5b40cd06e463ec6df
@@ -51,15 +55,15 @@ msgstr ""
 #: ../../src/plugins.rst:18 acc91769168747e9be672542c56385f1
 msgid ""
 "An Element represent usually a file, as each source file is loaded as an "
-"Element, and all Element remeining after plugins work are written back as"
-" files."
+"Element, and all Element remeining after plugins work are written back as "
+"files."
 msgstr ""
 
 #: ../../src/plugins.rst:20 521d00505024442fac7ad37e55eb2756
 msgid ""
 "However, this concept can be extended to other things, as in the Records "
-"plugin that can create new Elements for each record of a CSV file, which "
-"can be used and written as separates files."
+"plugin that can create new Elements for each record of a CSV file, which can"
+" be used and written as separates files."
 msgstr ""
 
 #: ../../src/plugins.rst:22 150a22af0154449bb7fd0ccea7247d2c
@@ -70,19 +74,19 @@ msgstr ""
 
 #: ../../src/plugins.rst:23 91465369c92c4629abfaa9eb6bb7cc97
 msgid "Metadata"
-msgstr ""
+msgstr "Métadonnées"
 
 #: ../../src/plugins.rst:25 821837950b444ca6939570e8dd043047
 msgid ""
-":envvar:`metadata` is a dictionary storing arbitrary public values. This "
-"is where plugins should store any data that should be globally accessible"
-" by the user or other plugins."
+":envvar:`metadata` is a dictionary storing arbitrary public values. This is "
+"where plugins should store any data that should be globally accessible by "
+"the user or other plugins."
 msgstr ""
 
 #: ../../src/plugins.rst:27 c930083f05864659bf322ec011bee56e
 msgid ""
-"For convenience, especially in the case of templating, global metadata "
-"are accessed as fallback when a requested metadata key is not found in a "
+"For convenience, especially in the case of templating, global metadata are "
+"accessed as fallback when a requested metadata key is not found in a "
 "Element."
 msgstr ""
 
@@ -92,10 +96,10 @@ msgstr ""
 
 #: ../../src/plugins.rst:30 068f24b01ffc46a19cb33b3602afc4e9
 msgid ""
-":envvar:`settings` is a dictionary storing values used as global settings"
-" on a project-scale level. Plugins may use this variable to store data, "
-"conventionally by using the plugin name as the metadata key, that have to"
-" be stored and accessible from other plugins, but not visible as global "
+":envvar:`settings` is a dictionary storing values used as global settings on"
+" a project-scale level. Plugins may use this variable to store data, "
+"conventionally by using the plugin name as the metadata key, that have to be"
+" stored and accessible from other plugins, but not visible as global "
 "metadata."
 msgstr ""
 
@@ -106,8 +110,8 @@ msgstr ""
 #: ../../src/plugins.rst:36 c0154da4cad34191847c9512bf84e6d6
 msgid ""
 "In Hausse, plugins are basically Python callables expecting specific "
-"variables and modifying them inplace. It is therefore possible to create "
-"a basic plugin by simply writing a Python method."
+"variables and modifying them inplace. It is therefore possible to create a "
+"basic plugin by simply writing a Python method."
 msgstr ""
 
 #: ../../src/plugins.rst:45 84f24016a8cf4d06a0b4c167a3a7f85f
@@ -116,19 +120,18 @@ msgstr ""
 
 #: ../../src/plugins.rst:47 081b5d0a88724831bab218c3ee961077
 msgid ""
-"Often, a plugin must work on a reduced set of elements. For example, you "
-"may want to apply **Markdown** plugin on a particular collection only, "
-"and keep other files untouched. In order to allow precise project design "
-"without the need to code functions systematically, Hausse provides "
-"**Selectors**."
+"Often, a plugin must work on a reduced set of elements. For example, you may"
+" want to apply **Markdown** plugin on a particular collection only, and keep"
+" other files untouched. In order to allow precise project design without the"
+" need to code functions systematically, Hausse provides **Selectors**."
 msgstr ""
 
 #: ../../src/plugins.rst:49 b3ae723111ad4c2f803dda3ec3558870
 msgid ""
-"A Selector is a callable object that can be initialized with a criteria, "
-"and passed to a summoned plugin. When project build runs that plugin, the"
-" Selector object is called with the :envvar:elements argument, and "
-"returns a subsets of Elements corresponding to the defined criteria."
+"A Selector is a callable object that can be initialized with a criteria, and"
+" passed to a summoned plugin. When project build runs that plugin, the "
+"Selector object is called with the :envvar:elements argument, and returns a "
+"subsets of Elements corresponding to the defined criteria."
 msgstr ""
 
 #: ../../src/plugins.rst:60 045da5885e6e4729ac052d9174579e29
@@ -143,8 +146,8 @@ msgstr ""
 
 #: ../../src/plugins.rst:64 636c66b8e05a4961be61c36b1cad9d82
 msgid ""
-"Also, Selectors are compatible with the Save and Rebuild feature shown in"
-" the next page."
+"Also, Selectors are compatible with the Save and Rebuild feature shown in "
+"the next page."
 msgstr ""
 
 #: ../../src/plugins.rst:67 1f2cb1e00a8a48768b926003910d2ec9
@@ -157,29 +160,14 @@ msgstr ""
 
 #: ../../src/plugins.rst:82 87c1bffa7059434fb2c40222ba7a0790
 msgid ""
-"Usually, plugins are implemented as classes inheriting from ``Plugin`` or"
-" one of its subclasses. This implementation standardize plugins, simplify"
-" some recurrent behaviors, and may allow in the future more extensive use"
-" of plugins, like performance analysis and debugging."
+"Usually, plugins are implemented as classes inheriting from ``Plugin`` or "
+"one of its subclasses. This implementation standardize plugins, simplify "
+"some recurrent behaviors, and may allow in the future more extensive use of "
+"plugins, like performance analysis and debugging."
 msgstr ""
 
 #: ../../src/plugins.rst:84 44ebc8a4e63a47149e3555c14832d247
 msgid ""
-"A fully implemented Plugin should at least be instantiable and callable "
-"with a :py:class:`hausse.lib.Project` argument."
+"A fully implemented Plugin should at least be instantiable and callable with"
+" a :py:class:`hausse.lib.Project` argument."
 msgstr ""
-
-#~ msgid ""
-#~ "In Hausse, all the data of a "
-#~ "project is stored in three variables "
-#~ ": :envvar:`elements`, :envvar:`metadata` and "
-#~ ":envvar:`settings`."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A fully implemented Plugin should at "
-#~ "least be instantiable and callable with"
-#~ " the three arguments :envvar:`elements`, "
-#~ ":envvar:`metadata` and :envvar:`settings`."
-#~ msgstr ""
-

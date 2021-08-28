@@ -1,150 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2021, André Nasturas
 # This file is distributed under the same license as the Hausse package.
-#
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
-# André Nasturas <andre.nasturas@delfosia.net>, 2021.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# André Nasturas <transifex@an.delfosia.net>, 2021
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Hausse \n"
+"Project-Id-Version: Hausse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-27 19:50+0200\n"
-"PO-Revision-Date: 2021-08-27 20:10+0200\n"
-"Last-Translator: André Nasturas <andre.nasturas@delfosia.net>\n"
-"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2021-08-28 16:34+0000\n"
+"Last-Translator: André Nasturas <transifex@an.delfosia.net>, 2021\n"
+"Language-Team: French (https://www.transifex.com/andrenasturas/teams/124287/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"Language: fr_FR\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.08.0\n"
 
 #: ../../src/introduction.rst:2 9c8e72ed26cb499ea29db3fffa7f991f
-#, fuzzy
 msgid "Getting Started"
 msgstr "Pour commencer"
 
 #: ../../src/introduction.rst:5 be50100cdbcf4389ac82f3ea6a8116b4
-#, fuzzy
 msgid "What is hausse?"
 msgstr "Qu'est-ce que hausse ?"
 
 #: ../../src/introduction.rst:7 2205a234ccae4153a8736775d55f7f08
-#, fuzzy
 msgid ""
 "**hausse** is a modular project generator, mainly used to build static "
 "websites. It collects files from a source folder, process them using a "
 "chosen set of plugins, and write them into an output folder."
 msgstr ""
-"**hausse** est un générateur de projet modulaire, principalement utilisé pour"
-" assembler des sites web statiques. Il collecte les fichiers dans un dossier"
-" source, les traite en utilisant un ensemble choisi de plugins, et les écrit"
-" dans un dossier de sortie."
+"**hausse** est un générateur de projet modulaire, principalement utilisé "
+"pour assembler des sites web statiques. Il collecte les fichiers dans un "
+"dossier source, les traite en utilisant un ensemble choisi de plugins, et "
+"les écrit dans un dossier de sortie."
 
 #: ../../src/introduction.rst:10 c7a42ddbb5904915af654faadd5cafe0
-#, fuzzy
 msgid ""
-"Hausse plugin-based behaviour is similar to the NodeJS project "
-"`Metalsmith <https://metalsmith.io>`_."
+"Hausse plugin-based behaviour is similar to the NodeJS project `Metalsmith "
+"<https://metalsmith.io>`_."
 msgstr ""
-"Le comportement basé sur des plugins de **hausse** est similaire au projet"
-" NodeJS `Metalsmith <https://metalsmith.io>`_."
+"Le comportement basé sur des plugins de **hausse** est similaire au projet "
+"NodeJS `Metalsmith <https://metalsmith.io>`_."
 
 #: ../../src/introduction.rst:12 f611ce6c4d644dd28431e6f4c4716a6c
-#, fuzzy
 msgid "Hausse is shipped with a fair amount of plugins."
 msgstr "**hausse** est accompagné d'un certain nombre de plugins."
 
 #: ../../src/introduction.rst:16 231fce95ed924b2282ff01ae378e49ec
-#, fuzzy
 msgid "Installation"
 msgstr "Installation"
 
 #: ../../src/introduction.rst:18 960e7bf6e6ac4b49a0b975505fa4e7d3
-#, fuzzy
 msgid "Hausse is available on `PyPI <https://pypi.org/project/hausse/>`_."
 msgstr ""
 "**hausse** est disponible sur `PyPI <https://pypi.org/project/hausse/>`_."
 
 #: ../../src/introduction.rst:24 069f4b62c63e400c9d7be9c89d264f9d
-#, fuzzy
 msgid ""
 "In order to generate static websites, you will probably need additional "
 "packages:"
 msgstr ""
-"Dans le but de générer des sites web statiques, vous aurez probablement"
-" besoin de paquets additionnels :"
+"Dans le but de générer des sites web statiques, vous aurez probablement "
+"besoin de paquets additionnels :"
 
 #: ../../src/introduction.rst:26 4396f9df3c7744cfa6d7db12efc67929
-#, fuzzy
 msgid ""
 "`markdown2 <https://pypi.org/project/markdown2>`_ for Markdown language "
 "processing"
 msgstr ""
-"`markdown2 <https://pypi.org/project/markdown2>`_ pour le traitement du"
-" langage Markdown"
+"`markdown2 <https://pypi.org/project/markdown2>`_ pour le traitement du "
+"langage Markdown"
 
 #: ../../src/introduction.rst:27 11c7ba43c9bc4308844a919b7fd155cf
-#, fuzzy
 msgid "`pybars3 <https://pypi.org/project/pybars3>`_ for Handlebars templates"
 msgstr ""
-"`pybars3 <https://pypi.org/project/pybars3>`_ pour les templates Handlebars"
+"`pybars3 <https://pypi.org/project/pybars3>`_ pour les modèles Handlebars"
 
 #: ../../src/introduction.rst:29 84544cdfde8740af950e5c2317e3d744
-#, fuzzy
 msgid ""
-"Due to the versatility of Hausse, these dependencies are optional and are"
-" not automatically installed with it."
+"Due to the versatility of Hausse, these dependencies are optional and are "
+"not automatically installed with it."
 msgstr ""
-"Compte tenu de la polyvalence de **hausse**, ces dépendances sont"
-" optionnelles et ne sont pas automatiquement installées."
+"Compte tenu de la polyvalence de **hausse**, ces dépendances sont "
+"optionnelles et ne sont pas automatiquement installées."
 
 #: ../../src/introduction.rst:32 4bd24df8befd48628ef1f29814436dbc
-#, fuzzy
 msgid "Hello world"
 msgstr "Hello world"
 
 #: ../../src/introduction.rst:34 07531ce87c8f42fc94797993abb794bc
-#, fuzzy
 msgid ""
 "Let's build a very simple static website. Write the following into "
 "``src/index.md``."
 msgstr ""
-"Commençons par construire un très simple site web statique. Écrivez ce qui"
-" suit dans ``src/index.md``."
+"Commençons par construire un très simple site web statique. Écrivez ce qui "
+"suit dans ``src/index.md``."
 
 #: ../../src/introduction.rst:42 56b784f938794576a80c4ab7e05b44ef
-#, fuzzy
 msgid "Then, open a Python file and write the following code:"
 msgstr "Ensuite, ouvrez un fichier Python et écrivez le code suivant :"
 
 #: ../../src/introduction.rst:53 a1f2151a8ce44f9fb938fc055481ec10
-#, fuzzy
 msgid ""
-"This code create a new Hausse project in the current directory, summons "
-"the **Markdown** plugin and triggers the project build, writing the "
-"result in ``dist/index.html``."
+"This code create a new Hausse project in the current directory, summons the "
+"**Markdown** plugin and triggers the project build, writing the result in "
+"``dist/index.html``."
 msgstr ""
-"Ce code crée un nouveau projet Hausse dans le dossier courant, invoque le"
-" plugin **Markdown** et déclenche la compilation du projet, écrivant le"
-" résultat dans ``dist/index.html``."
+"Ce code crée un nouveau projet Hausse dans le dossier courant, invoque le "
+"plugin **Markdown** et déclenche la compilation du projet, écrivant le "
+"résultat dans ``dist/index.html``."
 
 #: ../../src/introduction.rst:55 3c4e10473d4345bd9402f3224f487d4f
-#, fuzzy
 msgid "That's it ! You now have the basics to build nice static websites."
 msgstr ""
-"C'est tout ! Vous avez maintenant les bases pour compiler de sympathiques"
-" sites statiques."
-
-#~ msgid "What is Hausse?"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Hausse is a modular project generator,"
-#~ " mainly used to build static "
-#~ "websites. It collects files from a "
-#~ "source folder, process them using a "
-#~ "chosen set of plugins, and write "
-#~ "them into an output folder."
-#~ msgstr ""
-
+"C'est tout ! Vous avez maintenant les bases pour compiler de sympathiques "
+"sites statiques."
