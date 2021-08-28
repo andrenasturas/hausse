@@ -2,6 +2,6 @@ pypi:
   stage: Distribution
   script:
     - TWINE_PASSWORD=${PYPI_TOKEN} TWINE_USERNAME=__token__ python -m twine upload --verbose dist/*
-  only:
-    refs:
-      - tags
+  rules:
+    - if: $CI_COMMIT_REF_PROTECTED
+    - if: $CI_COMMIT_TAG

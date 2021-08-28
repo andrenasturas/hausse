@@ -14,3 +14,5 @@ locales push:
     - tx init --token ${TRANSIFEX_TOKEN} --no-interactive
     - tx config mapping-bulk --project hausse --file-extension '.pot' --source-file-dir docs/_build/gettext --source-lang en --type PO --expression 'locales/<lang>/LC_MESSAGES/{filepath}/{filename}.po' --execute
     - tx push --source
+  rules:
+    - if: $CI_COMMIT_REF_PROTECTED
