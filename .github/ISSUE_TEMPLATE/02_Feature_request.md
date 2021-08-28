@@ -1,5 +1,5 @@
 ---
-name: Core feature request
+name: 🏗️ Core feature request
 about: Propose a new core feature to be implemented
 title: "Feature: "
 labels: "feature"

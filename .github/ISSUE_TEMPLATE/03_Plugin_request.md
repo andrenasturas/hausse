@@ -1,5 +1,5 @@
 ---
-name: Plugin request
+name: 🐝 Plugin request
 about: Propose a new plugin to be implemented
 title: "Plugin: "
 labels: "plugin"

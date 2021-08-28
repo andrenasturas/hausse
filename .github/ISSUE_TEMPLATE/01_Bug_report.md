@@ -1,5 +1,5 @@
 ---
-name: Bug Report
+name: 🚨 Bug Report
 about: File a report describing a malfunction
 title: "Bug: "
 labels: "bug"
