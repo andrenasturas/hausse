@@ -1,6 +1,8 @@
+<img align="right" src="https://static.delfosia.net/hausse.png"/>
+
 # hausse
 
-<img align="right" src="https://static.delfosia.net/hausse.png"/>
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hausse)](https://pypi.org/project/hausse/) [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/andrenasturas/hausse)](https://codeclimate.com/github/andrenasturas/hausse) [![Code Climate coverage](https://img.shields.io/codeclimate/coverage/andrenasturas/hausse)](https://codeclimate.com/github/andrenasturas/hausse/code?sort=test_coverage)
 
 **hausse** is a python plugin-based static site generator. It works with plugins that can be chained to process files and produce the wanted result.
 
@@ -68,6 +70,7 @@ When `build()` is called on a Hausse project, all Plugins are successively calle
 You may also implement the `__init__` method as you wish to store Plugin parameters that will be needed during the build.
 
 Finally, if you feel like it should be added to hausse plugins, do not hesitate to [contribute](CONTRIBUTING.md)!
+
 ## Documentation
 
 A detailled documentation is available on [Read The Docs](https://hausse.readthedocs.io).
