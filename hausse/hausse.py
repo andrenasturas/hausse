@@ -195,7 +195,13 @@ class Hausse(Project):
         if hidden and not file.startswith("."):
             file = "." + file
 
-        file = self.settings[Keys.BASE] / Path(file)
+        file = Path(self.settings[Keys.BASE] / Path(file))
+
+        if not mode:
+            if file.ext in ["yml", "yaml"]:
+                mode = "yaml"
+            else:
+                mode = "json"
 
         settings = dict()
         if str(self.settings[Keys.SRC]) != Defaults.SRC:
@@ -209,17 +215,10 @@ class Hausse(Project):
         }
 
         with open(file, "w", encoding="utf-8") as f:
-            if mode == "json" or not mode and file.endswith(".json"):
+            if mode == "json":
                 json.dump(settings, f, ensure_ascii=False, indent=4)
 
-            if (
-                mode == "yaml"
-                or mode == "yml"
-                or not mode
-                and file.endswith(".yml")
-                or not mode
-                and file.endswith(".yaml")
-            ):
+            if mode in ["yaml", "yml"]:
                 yaml.dump(settings, f, allow_unicode=True)
 
     def load(self, file=None, mode=None):
