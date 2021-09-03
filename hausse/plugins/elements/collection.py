@@ -188,7 +188,7 @@ class Collection(IndexableCollection, SelectorPlugin):
         self,
         name: str,
         selector: Union[Selector, str, Iterable[Element]] = None,
-        indexBy: Optional[str] = None,
+        indexBy: Optional[str] = "_filename",
         metadata: dict = None,
         **kwargs,
     ):
