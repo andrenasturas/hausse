@@ -1,4 +1,7 @@
-import os, shutil, logging
+import logging
+import os
+import shutil
+
 
 def clean_dir(dir):
     for filename in os.listdir(dir):
